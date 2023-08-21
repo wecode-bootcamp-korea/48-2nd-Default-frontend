@@ -1,7 +1,8 @@
 import React from 'react';
+import Modal from '../../components/Modal/Modal';
 
 const Main = () => {
-  return <div>Main</div>;
+  return <Modal />;
 };
 
 export default Main;
