@@ -5,17 +5,7 @@ import { RiKakaoTalkFill } from 'react-icons/ri';
 import Button from '../Button/Button';
 import './Modal.scss';
 
-const Modal = ({
-  disabled,
-  isOpen,
-  title,
-  continueText,
-  onClose,
-  onSubmit,
-  body,
-  footer,
-  text,
-}) => {
+const Modal = ({ disabled, isOpen, title, onClose, body }) => {
   const handleSocialLoginSubmit = () => {
     if (disabled) return;
   };
