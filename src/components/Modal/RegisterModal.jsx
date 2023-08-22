@@ -10,7 +10,7 @@ const RegisterModal = () => {
   const bodyContent = (
     <div className="ModalContent">
       <ModalHead title="Default에 오신 것을 환영합니다." />
-      <form className="ModalInputBox">
+      <form className="RegisterModalInputBox">
         <Input className="ModalEmailInput" type="text" id="email" />
         <InputLabel className="ModalEmailLabel" label="Email" htmlFor="email" />
 
