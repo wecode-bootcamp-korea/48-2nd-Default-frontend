@@ -1,8 +1,8 @@
 import React from 'react';
-import Modal from '../../components/Modal/Modal';
+import RegisterModal from '../../components/Modal/RegisterModal';
 
 const Main = () => {
-  return <Modal />;
+  return <RegisterModal />;
 };
 
 export default Main;

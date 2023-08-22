@@ -27,14 +27,14 @@ const Modal = ({
           <button className="ModalCloseButton">
             <IoMdClose size={18} />
           </button>
-          <p>{title}</p>
+          <p className="ModalTitle">{title}</p>
         </header>
-        <div className="ModalBody">ㅇㅇㅇㅇㅇ</div>
+        <div className="ModalBody">{body}</div>
         <div className="ModalFooter">
           <div className="Divider">또는</div>
           <div className="ModalSocialLoginBox">
             <div className="SocialLoginButtonBox">
-              <FcGoogle size={18} className="GoogleImage" />
+              <FcGoogle size={25} className="GoogleImage" />
               <Button
                 disabled={disabled}
                 text="구글로 로그인하기"
@@ -43,7 +43,7 @@ const Modal = ({
               />
             </div>
             <div className="SocialLoginButtonBox">
-              <RiKakaoTalkFill size={18} className="KakaoImage" />
+              <RiKakaoTalkFill size={25} className="KakaoImage" />
               <Button
                 disabled={disabled}
                 text="카카오로 로그인하기"
