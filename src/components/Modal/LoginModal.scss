@@ -31,14 +31,14 @@
   .modalEmailLabel {
     position: absolute;
     left: 7.5%;
-    top: 27%;
+    top: 26%;
     color: $grey60;
   }
 
   .modalPasswordLabel {
     position: absolute;
     left: 7.5%;
-    top: 41%;
+    top: 39%;
     color: $grey60;
   }
 
@@ -54,23 +54,5 @@
     transform: translateY(-110%);
     transition: all ease-in-out 0.5s;
     font-size: 14px;
-  }
-
-  .modalNextButton {
-    width: 100%;
-    border: none;
-    border-radius: 10px;
-    padding: 20px 0;
-    margin-top: 20px;
-    background-color: $nextBtn;
-    color: white;
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
-
-    &:hover {
-      transition: all ease 0.5s;
-      opacity: 0.7;
-    }
   }
 }

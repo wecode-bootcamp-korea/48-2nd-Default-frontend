@@ -1,32 +1,85 @@
-import React from 'react';
-import Input from '../Input/Input';
+import React, { useState } from 'react';
 import Button from '../Button/Button';
+import Input from '../Input/Input';
 import InputLabel from '../Input/InputLabel';
 import Modal from './Modal';
-import ModalHead from './ModalHead';
 import './LoginModal.scss';
 
 const LoginModal = () => {
-  const bodyContent = (
-    <div className="modalContent">
-      <ModalHead title="다시 오신 것을 환영합니다." />
-      <form className="loginModalInputBox">
-        <Input className="modalEmailInput" type="text" id="email" />
-        <InputLabel className="modalEmailLabel" label="Email" htmlFor="email" />
+  const [loginUserInfo, setLoginUserInfo] = useState({
+    name: '',
+    email: '',
+    password: '',
+  });
 
-        <Input className="modalPasswordInput" type="password" id="password" />
-        <InputLabel
-          className="modalPasswordLabel"
-          label="Password"
-          htmlFor="password"
-        />
+  const loginData = {
+    name: loginUserInfo.name,
+    email: loginUserInfo.email,
+    password: loginUserInfo.password,
+  };
 
-        <Button className="modalNextButton" text="계속" />
-      </form>
-    </div>
+  const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+  const emailIsValid = emailPattern.test(loginUserInfo.email);
+  const passwordIsValid = loginUserInfo.password.length >= 5;
+  const isValid = emailIsValid && passwordIsValid;
+
+  const handleLogin = () => {
+    fetch('/data/data.json', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8',
+      },
+      body: JSON.stringify(loginData),
+    })
+      .then(res => res.json())
+      .then(data => {
+        if (data.accessToken) {
+          localStorage.setItem('accessToken', data.accessToken);
+        }
+      });
+  };
+
+  const handleInputChange = e => {
+    const { id, value } = e.target;
+    setLoginUserInfo(prev => ({
+      ...prev,
+      [id]: value,
+    }));
+  };
+
+  return (
+    <Modal title="로그인" subTitle="다시 오신 것을 환영합니다.">
+      <div className="modalContent">
+        <form className="loginModalInputBox">
+          <Input
+            className="modalEmailInput"
+            type="text"
+            id="email"
+            onChange={handleInputChange}
+          />
+          <InputLabel
+            className="modalEmailLabel"
+            label="Email"
+            htmlFor="email"
+          />
+
+          <Input
+            className="modalPasswordInput"
+            type="password"
+            id="password"
+            onChange={handleInputChange}
+          />
+          <InputLabel
+            className="modalPasswordLabel"
+            label="Password"
+            htmlFor="password"
+          />
+
+          <Button text="계속" onClick={handleLogin} disabled={!isValid} />
+        </form>
+      </div>
+    </Modal>
   );
-
-  return <Modal title="로그인" body={bodyContent} />;
 };
 
 export default LoginModal;

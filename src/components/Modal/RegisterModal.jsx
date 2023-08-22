@@ -1,35 +1,96 @@
-import React from 'react';
-import Input from '../Input/Input';
-import Button from '../Button/Button';
-import InputLabel from '../Input/InputLabel';
+import React, { useState } from 'react';
 import Modal from './Modal';
-import ModalHead from './ModalHead';
+import Button from '../Button/Button';
+import Input from '../Input/Input';
+import InputLabel from '../Input/InputLabel';
 import './RegisterModal.scss';
 
 const RegisterModal = () => {
-  const bodyContent = (
-    <div className="modalContent">
-      <ModalHead title="Default에 오신 것을 환영합니다." />
-      <form className="registerModalInputBox">
-        <Input className="modalEmailInput" type="text" id="email" />
-        <InputLabel className="modalEmailLabel" label="Email" htmlFor="email" />
+  const [userInfo, setUserInfo] = useState({
+    name: '',
+    email: '',
+    password: '',
+    isHost: false,
+  });
 
-        <Input className="modalPasswordInput" type="password" id="password" />
-        <InputLabel
-          className="modalPasswordLabel"
-          label="Password"
-          htmlFor="password"
-        />
+  const registerData = {
+    name: userInfo.name,
+    email: userInfo.email,
+    password: userInfo.password,
+    isHost: userInfo.isHost,
+  };
 
-        <Input className="modalNameInput" type="text" id="name" />
-        <InputLabel className="modalNameLabel" label="Name" htmlFor="name" />
+  const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+  const emailIsValid = emailPattern.test(userInfo.email);
+  const passwordIsValid = userInfo.password.length >= 5;
+  const isValid = emailIsValid && passwordIsValid;
+  const isDisabled = isValid && userInfo.name !== '';
 
-        <Button className="modalNextButton" text="계속" />
-      </form>
-    </div>
+  const handleInputChange = e => {
+    const { value, checked, id } = e.target;
+    setUserInfo(prev => ({
+      ...prev,
+      [id]: value,
+    }));
+  };
+
+  if (isValid) {
+    fetch('/data/data.json', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8',
+      },
+      body: JSON.stringify(registerData),
+    })
+      .then(res => res.json())
+      .then(data => console.log('결과: ', data));
+  }
+
+  return (
+    <Modal title="회원가입" subTitle="Default에 오신 것을 환영합니다.">
+      <div className="modalContent">
+        <form className="registerModalInputBox">
+          <Input
+            className="modalNameInput"
+            type="text"
+            id="name"
+            onChange={handleInputChange}
+          />
+          <InputLabel
+            className="modalRegisterNameLabel"
+            label="Name"
+            htmlFor="name"
+          />
+
+          <Input
+            className="modalEmailInput"
+            type="text"
+            id="email"
+            onChange={handleInputChange}
+          />
+          <InputLabel
+            className="modalRegisterEmailLabel"
+            label="Email"
+            htmlFor="email"
+          />
+
+          <Input
+            className="modalPasswordInput"
+            type="password"
+            id="password"
+            onChange={handleInputChange}
+          />
+          <InputLabel
+            className="modalRegisterPasswordLabel"
+            label="Password"
+            htmlFor="password"
+          />
+
+          <Button text="계속" disabled={!isDisabled} />
+        </form>
+      </div>
+    </Modal>
   );
-
-  return <Modal title="회원가입" body={bodyContent} />;
 };
 
 export default RegisterModal;
