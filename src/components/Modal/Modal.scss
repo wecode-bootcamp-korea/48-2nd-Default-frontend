@@ -1,6 +1,6 @@
 @import '../../styles/variables.scss';
 
-.ModalContainer {
+.modalContainer {
   position: fixed;
   top: 0;
   left: 0;
@@ -11,7 +11,7 @@
   justify-content: center;
   background-color: rgba(0, 0, 0, 0.7);
 
-  .ModalContentContainer {
+  .modalContentContainer {
     position: relative;
     max-height: 100%;
     width: 600px;
@@ -25,7 +25,7 @@
     background-color: white;
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
 
-    .ModalHeader {
+    .modalHeader {
       max-width: 90%;
       width: 100%;
       height: auto;
@@ -36,7 +36,7 @@
       border-bottom: 1px solid $underline;
       padding: 20px 0;
 
-      .ModalCloseButton {
+      .modalCloseButton {
         position: absolute;
         left: 10px;
         outline: none;
@@ -46,19 +46,19 @@
         cursor: pointer;
       }
 
-      .ModalTitle {
+      .modalTitle {
         font-size: 16px;
       }
     }
 
-    .ModalBody {
+    .modalBody {
       max-width: 90%;
       width: 100%;
       height: auto;
       padding-top: 30px;
     }
 
-    .ModalFooter {
+    .modalFooter {
       max-width: 90%;
       width: 100%;
       height: auto;
@@ -68,7 +68,7 @@
       align-items: center;
       margin-bottom: 20px;
 
-      .Divider {
+      .divider {
         width: 100%;
         display: flex;
         align-items: center;
@@ -88,14 +88,14 @@
         }
       }
 
-      .ModalSocialLoginBox {
+      .modalSocialLoginBox {
         width: 100%;
         display: flex;
         flex-direction: column;
         justify-content: center;
         gap: 30px;
 
-        .SocialLoginButtonBox {
+        .socialLoginButtonBox {
           width: 100%;
           display: flex;
           align-items: center;
@@ -109,7 +109,7 @@
             cursor: pointer;
           }
 
-          .SocialLoginButton {
+          .socialLoginButton {
             position: relative;
             border: none;
             padding: 14px 0;
@@ -119,12 +119,12 @@
             cursor: pointer;
           }
 
-          .GoogleImage {
+          .googleImage {
             position: absolute;
             left: 50px;
           }
 
-          .KakaoImage {
+          .kakaoImage {
             position: absolute;
             left: 50px;
           }

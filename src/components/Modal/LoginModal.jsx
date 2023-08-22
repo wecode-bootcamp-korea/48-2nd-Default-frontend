@@ -8,20 +8,20 @@ import './LoginModal.scss';
 
 const LoginModal = () => {
   const bodyContent = (
-    <div className="ModalContent">
+    <div className="modalContent">
       <ModalHead title="다시 오신 것을 환영합니다." />
-      <form className="LoginModalInputBox">
-        <Input className="ModalEmailInput" type="text" id="email" />
-        <InputLabel className="ModalEmailLabel" label="Email" htmlFor="email" />
+      <form className="loginModalInputBox">
+        <Input className="modalEmailInput" type="text" id="email" />
+        <InputLabel className="modalEmailLabel" label="Email" htmlFor="email" />
 
-        <Input className="ModalPasswordInput" type="password" id="password" />
+        <Input className="modalPasswordInput" type="password" id="password" />
         <InputLabel
-          className="ModalPasswordLabel"
+          className="modalPasswordLabel"
           label="Password"
           htmlFor="password"
         />
 
-        <Button className="ModalNextButton" text="계속" />
+        <Button className="modalNextButton" text="계속" />
       </form>
     </div>
   );

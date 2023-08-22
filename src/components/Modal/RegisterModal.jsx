@@ -8,23 +8,23 @@ import './RegisterModal.scss';
 
 const RegisterModal = () => {
   const bodyContent = (
-    <div className="ModalContent">
+    <div className="modalContent">
       <ModalHead title="Default에 오신 것을 환영합니다." />
-      <form className="RegisterModalInputBox">
-        <Input className="ModalEmailInput" type="text" id="email" />
-        <InputLabel className="ModalEmailLabel" label="Email" htmlFor="email" />
+      <form className="registerModalInputBox">
+        <Input className="modalEmailInput" type="text" id="email" />
+        <InputLabel className="modalEmailLabel" label="Email" htmlFor="email" />
 
-        <Input className="ModalPasswordInput" type="password" id="password" />
+        <Input className="modalPasswordInput" type="password" id="password" />
         <InputLabel
-          className="ModalPasswordLabel"
+          className="modalPasswordLabel"
           label="Password"
           htmlFor="password"
         />
 
-        <Input className="ModalNameInput" type="text" id="name" />
-        <InputLabel className="ModalNameLabel" label="Name" htmlFor="name" />
+        <Input className="modalNameInput" type="text" id="name" />
+        <InputLabel className="modalNameLabel" label="Name" htmlFor="name" />
 
-        <Button className="ModalNextButton" text="계속" />
+        <Button className="modalNextButton" text="계속" />
       </form>
     </div>
   );

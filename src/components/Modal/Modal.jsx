@@ -11,34 +11,34 @@ const Modal = ({ disabled, isOpen, title, onClose, body }) => {
   };
 
   return (
-    <div className="ModalContainer">
-      <div className="ModalContentContainer">
-        <header className="ModalHeader">
-          <button className="ModalCloseButton">
+    <div className="modalContainer">
+      <div className="modalContentContainer">
+        <header className="modalHeader">
+          <button className="modalCloseButton">
             <IoMdClose size={18} />
           </button>
-          <p className="ModalTitle">{title}</p>
+          <p className="modalTitle">{title}</p>
         </header>
-        <div className="ModalBody">{body}</div>
-        <div className="ModalFooter">
-          <div className="Divider">또는</div>
-          <div className="ModalSocialLoginBox">
-            <div className="SocialLoginButtonBox">
-              <FcGoogle size={25} className="GoogleImage" />
+        <div className="modalBody">{body}</div>
+        <div className="modalFooter">
+          <div className="divider">또는</div>
+          <div className="modalSocialLoginBox">
+            <div className="socialLoginButtonBox">
+              <FcGoogle size={25} className="googleImage" />
               <Button
                 disabled={disabled}
                 text="구글로 로그인하기"
                 onClick={handleSocialLoginSubmit}
-                className="SocialLoginButton"
+                className="socialLoginButton"
               />
             </div>
-            <div className="SocialLoginButtonBox">
-              <RiKakaoTalkFill size={25} className="KakaoImage" />
+            <div className="socialLoginButtonBox">
+              <RiKakaoTalkFill size={25} className="kakaoImage" />
               <Button
                 disabled={disabled}
                 text="카카오로 로그인하기"
                 onClick={handleSocialLoginSubmit}
-                className="SocialLoginButton"
+                className="socialLoginButton"
               />
             </div>
           </div>
