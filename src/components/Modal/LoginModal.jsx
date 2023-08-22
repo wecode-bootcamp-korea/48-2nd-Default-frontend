@@ -4,9 +4,9 @@ import Button from '../Button/Button';
 import InputLabel from '../Input/InputLabel';
 import Modal from './Modal';
 import ModalHead from './ModalHead';
-import './RegisterModal.scss';
+import './LoginModal.scss';
 
-const RegisterModal = () => {
+const LoginModal = () => {
   const bodyContent = (
     <div className="ModalContent">
       <ModalHead title="Default에 오신 것을 환영합니다." />
@@ -21,15 +21,12 @@ const RegisterModal = () => {
           htmlFor="password"
         />
 
-        <Input className="ModalNameInput" type="text" id="name" />
-        <InputLabel className="ModalNameLabel" label="Name" htmlFor="name" />
-
         <Button className="ModalNextButton" text="계속" />
       </form>
     </div>
   );
 
-  return <Modal title="회원가입" body={bodyContent} />;
+  return <Modal title="로그인" body={bodyContent} />;
 };
 
-export default RegisterModal;
+export default LoginModal;
