@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { IoMdClose } from 'react-icons/io';
-import Input from '../Input/Input';
-import InputLabel from '../Input/InputLabel';
 import ModalHead from './ModalHead';
-import './Modal.scss';
 import ModalSocialLogin from './ModalSocialLogin';
+import './Modal.scss';
 
 const Modal = ({
   children,
@@ -43,8 +41,12 @@ const Modal = ({
           <div className="modalBodyTitleBox">
             <ModalHead title={subTitle} />
             <div className="hostBox">
-              <Input type="checkbox" onChange={handleChenckboxChange} />
-              <InputLabel label="호스트로 가입하시겠어요?" />
+              <input
+                type="checkbox"
+                onChange={handleChenckboxChange}
+                id="host"
+              />
+              <label htmlFor="host">호스트로 가입하시겠어요?</label>
             </div>
           </div>
           {children}

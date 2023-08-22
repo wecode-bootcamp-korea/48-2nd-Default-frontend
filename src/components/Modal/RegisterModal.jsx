@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import Modal from './Modal';
 import Button from '../Button/Button';
-import Input from '../Input/Input';
-import InputLabel from '../Input/InputLabel';
 import './RegisterModal.scss';
 
 const RegisterModal = () => {
@@ -12,13 +10,6 @@ const RegisterModal = () => {
     password: '',
     isHost: false,
   });
-
-  const registerData = {
-    name: userInfo.name,
-    email: userInfo.email,
-    password: userInfo.password,
-    isHost: userInfo.isHost,
-  };
 
   const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
   const emailIsValid = emailPattern.test(userInfo.email);
@@ -40,7 +31,7 @@ const RegisterModal = () => {
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
       },
-      body: JSON.stringify(registerData),
+      body: JSON.stringify(userInfo),
     })
       .then(res => res.json())
       .then(data => console.log('결과: ', data));
@@ -56,42 +47,53 @@ const RegisterModal = () => {
     >
       <div className="modalContent">
         <form className="registerModalInputBox">
-          <Input
-            className="modalNameInput"
-            type="text"
-            id="name"
-            onChange={handleInputChange}
-          />
-          <InputLabel
-            className="modalRegisterNameLabel"
-            label="Name"
-            htmlFor="name"
-          />
+          <div className="nameInputBox">
+            <input
+              className="modalInput"
+              type="text"
+              id="name"
+              value={userInfo.name}
+              onChange={handleInputChange}
+            />
+            <label
+              className={`modalLabel ${userInfo.name ? 'top' : ''}`}
+              htmlFor="name"
+            >
+              Name
+            </label>
+          </div>
 
-          <Input
-            className="modalEmailInput"
-            type="text"
-            id="email"
-            onChange={handleInputChange}
-          />
-          <InputLabel
-            className="modalRegisterEmailLabel"
-            label="Email"
-            htmlFor="email"
-          />
+          <div className="emailInputBox">
+            <input
+              className="modalInput"
+              type="text"
+              id="email"
+              value={userInfo.email}
+              onChange={handleInputChange}
+            />
+            <label
+              className={`modalLabel ${userInfo.email ? 'top' : ''}`}
+              htmlFor="email"
+            >
+              Email
+            </label>
+          </div>
 
-          <Input
-            className="modalPasswordInput"
-            type="password"
-            id="password"
-            onChange={handleInputChange}
-          />
-          <InputLabel
-            className="modalRegisterPasswordLabel"
-            label="Password"
-            htmlFor="password"
-          />
-
+          <div className="passwordInputBox">
+            <input
+              className="modalInput"
+              type="password"
+              id="password"
+              value={userInfo.password}
+              onChange={handleInputChange}
+            />
+            <label
+              className={`modalLabel ${userInfo.password ? 'top' : ''}`}
+              htmlFor="password"
+            >
+              Password
+            </label>
+          </div>
           <Button text="계속" disabled={!isDisabled} />
         </form>
       </div>

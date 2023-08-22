@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
 import Button from '../Button/Button';
-import Input from '../Input/Input';
-import InputLabel from '../Input/InputLabel';
 import Modal from './Modal';
 import './LoginModal.scss';
 
@@ -11,12 +9,6 @@ const LoginModal = () => {
     email: '',
     password: '',
   });
-
-  const loginData = {
-    name: loginUserInfo.name,
-    email: loginUserInfo.email,
-    password: loginUserInfo.password,
-  };
 
   const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
   const emailIsValid = emailPattern.test(loginUserInfo.email);
@@ -29,7 +21,7 @@ const LoginModal = () => {
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
       },
-      body: JSON.stringify(loginData),
+      body: JSON.stringify(loginUserInfo),
     })
       .then(res => res.json())
       .then(data => {
@@ -57,29 +49,37 @@ const LoginModal = () => {
     >
       <div className="modalContent">
         <form className="loginModalInputBox">
-          <Input
-            className="modalEmailInput"
-            type="text"
-            id="email"
-            onChange={handleInputChange}
-          />
-          <InputLabel
-            className="modalEmailLabel"
-            label="Email"
-            htmlFor="email"
-          />
+          <div className="emailInputBox">
+            <input
+              className="modalInput"
+              type="text"
+              id="email"
+              value={loginUserInfo.email}
+              onChange={handleInputChange}
+            />
+            <label
+              className={`modalLabel ${loginUserInfo.email ? 'top' : ''}`}
+              htmlFor="email"
+            >
+              Email
+            </label>
+          </div>
 
-          <Input
-            className="modalPasswordInput"
-            type="password"
-            id="password"
-            onChange={handleInputChange}
-          />
-          <InputLabel
-            className="modalPasswordLabel"
-            label="Password"
-            htmlFor="password"
-          />
+          <div className="passwordInputBox">
+            <input
+              className="modalInput"
+              type="password"
+              id="password"
+              value={loginUserInfo.password}
+              onChange={handleInputChange}
+            />
+            <label
+              className={`modalLabel ${loginUserInfo.password ? 'top' : ''}`}
+              htmlFor="password"
+            >
+              Password
+            </label>
+          </div>
 
           <Button text="계속" onClick={handleLogin} disabled={!isValid} />
         </form>
