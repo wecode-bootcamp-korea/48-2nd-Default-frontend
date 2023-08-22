@@ -1,21 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import { IoMdClose } from 'react-icons/io';
-import { FcGoogle } from 'react-icons/fc';
-import { RiKakaoTalkFill } from 'react-icons/ri';
-import Button from '../Button/Button';
 import Input from '../Input/Input';
+import InputLabel from '../Input/InputLabel';
 import ModalHead from './ModalHead';
 import './Modal.scss';
-import InputLabel from '../Input/InputLabel';
+import ModalSocialLogin from './ModalSocialLogin';
 
 const Modal = ({
   children,
   disabled,
   isOpen,
   title,
-  onClose,
   subTitle,
+  redirectText,
+  redirectLabel,
+  onClose,
   onSubmit,
+  handleRedirect,
 }) => {
   const [showModal, setShowModal] = useState(false);
   const [isHost, setIsHost] = useState(false);
@@ -23,15 +24,6 @@ const Modal = ({
   useEffect(() => {
     setShowModal(isOpen);
   }, [isOpen]);
-
-  const handleSocialLoginSubmit = () => {
-    if (disabled) return;
-
-    setShowModal(false);
-    setTimeout(() => {
-      onClose();
-    }, 300);
-  };
 
   const handleChenckboxChange = e => {
     const { checked } = e.target;
@@ -59,20 +51,11 @@ const Modal = ({
         </div>
         <div className="modalFooter">
           <div className="divider">또는</div>
-          <div className="modalSocialLoginBox">
-            <div className="googleSocialButtonBox">
-              <FcGoogle size={25} className="googleImage" />
-              <Button
-                text="구글로 로그인하기"
-                onClick={handleSocialLoginSubmit}
-              />
-            </div>
-            <div className="kakaoSocialButtonBox">
-              <RiKakaoTalkFill size={25} className="kakaoImage" />
-              <Button
-                text="카카오로 로그인하기"
-                onClick={handleSocialLoginSubmit}
-              />
+          <ModalSocialLogin />
+          <div className="footerTextBox">
+            <p>{redirectLabel}</p>
+            <div onClick={handleRedirect} className="footerText">
+              {redirectText}
             </div>
           </div>
         </div>

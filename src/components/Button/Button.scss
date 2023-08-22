@@ -22,6 +22,14 @@
     opacity: 0.3;
     cursor: default;
   }
+
+  &.large {
+    width: 64px;
+  }
+
+  &.full {
+    width: 100%;
+  }
 }
 
 .large {

@@ -48,7 +48,13 @@ const LoginModal = () => {
   };
 
   return (
-    <Modal title="로그인" subTitle="다시 오신 것을 환영합니다.">
+    <Modal
+      title="로그인"
+      subTitle="다시 오신 것을 환영합니다."
+      redirectText="회원가입"
+      redirectLabel="아직 회원이 아니십니까?"
+      handleRedirect={() => alert('회원가입')}
+    >
       <div className="modalContent">
         <form className="loginModalInputBox">
           <Input

@@ -132,17 +132,20 @@
         }
       }
 
-      .footer {
+      .footerTextBox {
         display: flex;
         align-items: center;
-        justify-content: center;
         gap: 10px;
         margin-top: 20px;
-        color: rgba(54, 52, 52, 0.7);
 
-        .goToLogin {
-          font-size: 14px;
+        .footerText {
+          transition: all ease 0.5s;
+          color: red;
           cursor: pointer;
+
+          &:hover {
+            color: rgba(54, 52, 52, 0.7);
+          }
         }
       }
     }

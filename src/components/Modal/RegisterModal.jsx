@@ -27,7 +27,7 @@ const RegisterModal = () => {
   const isDisabled = isValid && userInfo.name !== '';
 
   const handleInputChange = e => {
-    const { value, checked, id } = e.target;
+    const { value, id } = e.target;
     setUserInfo(prev => ({
       ...prev,
       [id]: value,
@@ -47,7 +47,13 @@ const RegisterModal = () => {
   }
 
   return (
-    <Modal title="회원가입" subTitle="Default에 오신 것을 환영합니다.">
+    <Modal
+      title="회원가입"
+      subTitle="Default에 오신 것을 환영합니다."
+      redirectText="로그인"
+      redirectLabel="이미 회원이신가요?"
+      handleRedirect={() => alert('로그인')}
+    >
       <div className="modalContent">
         <form className="registerModalInputBox">
           <Input
