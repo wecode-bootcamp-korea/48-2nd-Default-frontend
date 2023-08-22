@@ -9,7 +9,7 @@ import './LoginModal.scss';
 const LoginModal = () => {
   const bodyContent = (
     <div className="ModalContent">
-      <ModalHead title="Default에 오신 것을 환영합니다." />
+      <ModalHead title="다시 오신 것을 환영합니다." />
       <form className="ModalInputBox">
         <Input className="ModalEmailInput" type="text" id="email" />
         <InputLabel className="ModalEmailLabel" label="Email" htmlFor="email" />
