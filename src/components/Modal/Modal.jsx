@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { IoMdClose } from 'react-icons/io';
-import ModalHead from './ModalHead';
 import ModalSocialLogin from './ModalSocialLogin';
 import './Modal.scss';
 
@@ -10,19 +9,10 @@ const Modal = ({
   subTitle,
   redirectText,
   redirectLabel,
-  onSubmit,
+  onClose,
   handleRedirect,
 }) => {
-  const [showModal, setShowModal] = useState(true);
   const [isHost, setIsHost] = useState(false);
-
-  useEffect(() => {
-    setShowModal(showModal);
-  }, [showModal]);
-
-  const handleClose = () => {
-    setShowModal(false);
-  };
 
   const handleChenckboxChange = e => {
     const { checked } = e.target;
@@ -40,24 +30,24 @@ const Modal = ({
   };
 
   return (
-    <div className={`modalContainer ${showModal ? 'black' : 'white'}`}>
-      <div className={`modalContentContainer  ${showModal ? 'show' : 'hide'}`}>
+    <div className="modalContainer black">
+      <div className="modalContentContainer">
         <header className="modalHeader">
           <button className="modalCloseButton">
-            <IoMdClose size={18} onClick={handleClose} />
+            <IoMdClose size={18} onClick={onClose} />
           </button>
           <p className="modalTitle">{title}</p>
         </header>
         <div className="modalBody">
           <div className="modalBodyTitleBox">
-            <ModalHead title={subTitle} />
+            <div className="modalSubTitle">{subTitle}</div>
             <div className="hostBox">
               <input
                 type="checkbox"
                 onChange={handleChenckboxChange}
                 id="host"
               />
-              <label htmlFor="host">호스트로 가입하시겠어요?</label>
+              <label htmlFor="host">호스트로 로그인</label>
             </div>
           </div>
           {children}

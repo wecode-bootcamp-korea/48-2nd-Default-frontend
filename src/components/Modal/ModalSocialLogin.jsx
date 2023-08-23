@@ -2,6 +2,7 @@ import React from 'react';
 import { FcGoogle } from 'react-icons/fc';
 import { RiKakaoTalkFill } from 'react-icons/ri';
 import Button from '../Button/Button';
+import './ModalSocialLogin.scss';
 
 const navigate = url => {
   window.location.href = url;
