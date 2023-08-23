@@ -5,8 +5,8 @@ import LoginModal from '../../components/Modal/LoginModal';
 const Main = () => {
   return (
     <div>
-      {/* <LoginModal /> */}
-      <RegisterModal />
+      <LoginModal />
+      {/* <RegisterModal /> */}
       main
     </div>
   );

@@ -16,7 +16,7 @@ const LoginModal = () => {
   const isValid = emailIsValid && passwordIsValid;
 
   const handleLogin = () => {
-    fetch('/data/data.json', {
+    fetch('http://10.58.52.81:3000/user/signin', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
@@ -49,7 +49,7 @@ const LoginModal = () => {
       handleRedirect={() => alert('회원가입')}
     >
       <div className="modalContent">
-        <form className="loginModalInputBox">
+        <div className="loginModalInputBox">
           <div className="emailInputBox">
             <input
               className="modalInput"
@@ -83,7 +83,7 @@ const LoginModal = () => {
           </div>
 
           <Button text="계속" onClick={handleLogin} disabled={!isValid} />
-        </form>
+        </div>
       </div>
     </Modal>
   );

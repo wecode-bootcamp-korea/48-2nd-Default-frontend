@@ -27,7 +27,7 @@ const RegisterModal = () => {
 
   const handleRegister = () => {
     if (isValid) {
-      fetch('/data/data.json', {
+      fetch('http://10.58.52.81:3000/user/signup', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json;charset=utf-8',
