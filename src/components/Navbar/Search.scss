@@ -1,0 +1,28 @@
+.searchContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  padding: 16px 40px;
+  border: 1px solid #dddddd;
+  border-color: rgb(229 229 229);
+  border-radius: 9999px;
+  transition: cubic-bezier(0.4, 0, 0.2, 1) 150ms;
+  cursor: pointer;
+
+  &:hover {
+    box-shadow:
+      0 4px 6px -1px rgb(0 0 0 / 0.1),
+      0 2px 4px -2px rgb(0 0 0 / 0.1);
+  }
+
+  .searchInputName {
+    font-weight: bold;
+  }
+
+  .searchIconBox {
+    width: 40px;
+    border: 1px solid red;
+    border-radius: 50%;
+  }
+}
