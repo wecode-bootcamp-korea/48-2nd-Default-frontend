@@ -1,10 +1,10 @@
 import React from 'react';
-import Navbar from '../../components/Navbar/Navbar';
+import './Main.scss';
 
 const Main = () => {
   return (
-    <div>
-      <Navbar />
+    <div className="mainContainer">
+      <div>dasfdfsa</div>
     </div>
   );
 };

@@ -1,15 +1,50 @@
-import React from 'react';
-import './Navbar.scss';
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { ImSearch } from 'react-icons/im';
 import Logo from './Logo';
 import Search from './Search';
 import UserMenu from './UserMenu';
+import './Navbar.scss';
 
 const Navbar = () => {
+  const [expanded, setExpanded] = useState(false);
+
+  const handleSearchClick = () => {
+    setExpanded(prev => !prev);
+  };
+
   return (
     <div className="navbarContainer">
       <div className="navbarContentBox">
-        <Logo />
-        <Search />
+        <Link to="/">
+          <Logo />
+        </Link>
+        {!expanded && (
+          <Search expanded={expanded} handleSearchClick={handleSearchClick} />
+        )}
+
+        {expanded && (
+          <div className="fullExpanded">
+            <p className="searchTitle">숙소</p>
+            <div
+              className={`expandedSearchContainer ${
+                expanded ? 'expand' : 'hide'
+              }`}
+              onClick={handleSearchClick}
+            >
+              <div className="searchCountryBox">
+                <p className="expandedSearchInputName">
+                  어느 나라로 여행하실래요?
+                </p>
+                <p>국가 검색</p>
+              </div>
+              <div className="expandedSearchIconBox">
+                <ImSearch className="expandedSearchIcon" size={14} />
+                <span className="searchText">검색</span>
+              </div>
+            </div>
+          </div>
+        )}
         <UserMenu />
       </div>
     </div>
