@@ -26,23 +26,19 @@ const RegisterModal = ({ onClose, handleRedirect }) => {
     }));
   };
 
-  useEffect(() => {
-    const handleRegister = e => {
-      if (isValid) {
-        fetch('http://10.58.52.81:3000/user/signup', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json;charset=utf-8',
-          },
-          body: JSON.stringify(userInfo),
-        })
-          .then(res => res.json())
-          .then(data => console.log(data));
-      }
-    };
-
-    handleRegister();
-  }, []);
+  const handleRegister = e => {
+    if (isValid) {
+      fetch('http://10.58.52.81:3000/user/signup', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json;charset=utf-8',
+        },
+        body: JSON.stringify(userInfo),
+      })
+        .then(res => res.json())
+        .then(data => console.log(data));
+    }
+  };
 
   return (
     <Modal
