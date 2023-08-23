@@ -25,28 +25,30 @@ const RegisterModal = () => {
     }));
   };
 
-  if (isValid) {
-    fetch('/data/data.json', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json;charset=utf-8',
-      },
-      body: JSON.stringify(userInfo),
-    })
-      .then(res => res.json())
-      .then(data => console.log('결과: ', data));
-  }
+  const handleRegister = () => {
+    if (isValid) {
+      fetch('/data/data.json', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json;charset=utf-8',
+        },
+        body: JSON.stringify(userInfo),
+      })
+        .then(res => res.json())
+        .then(data => console.log(data));
+    }
+  };
 
   return (
     <Modal
       title="회원가입"
       subTitle="Default에 오신 것을 환영합니다."
       redirectText="로그인"
-      redirectLabel="이미 회원이신가요?"
+      redirectLabel="이미 계정이 있으신가요?"
       handleRedirect={() => alert('로그인')}
     >
       <div className="modalContent">
-        <form className="registerModalInputBox">
+        <div className="registerModalInputBox">
           <div className="nameInputBox">
             <input
               className="modalInput"
@@ -94,8 +96,8 @@ const RegisterModal = () => {
               Password
             </label>
           </div>
-          <Button text="계속" disabled={!isDisabled} />
-        </form>
+          <Button text="계속" disabled={!isDisabled} onClick={handleRegister} />
+        </div>
       </div>
     </Modal>
   );

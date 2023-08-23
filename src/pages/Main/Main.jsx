@@ -3,8 +3,13 @@ import RegisterModal from '../../components/Modal/RegisterModal';
 import LoginModal from '../../components/Modal/LoginModal';
 
 const Main = () => {
-  return <LoginModal />;
-  // return <RegisterModal />;
+  return (
+    <div>
+      {/* <LoginModal /> */}
+      <RegisterModal />
+      main
+    </div>
+  );
 };
 
 export default Main;

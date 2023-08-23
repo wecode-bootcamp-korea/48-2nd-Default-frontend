@@ -6,34 +6,45 @@ import './Modal.scss';
 
 const Modal = ({
   children,
-  disabled,
-  isOpen,
   title,
   subTitle,
   redirectText,
   redirectLabel,
-  onClose,
   onSubmit,
   handleRedirect,
 }) => {
-  const [showModal, setShowModal] = useState(false);
+  const [showModal, setShowModal] = useState(true);
   const [isHost, setIsHost] = useState(false);
 
   useEffect(() => {
-    setShowModal(isOpen);
-  }, [isOpen]);
+    setShowModal(showModal);
+  }, [showModal]);
+
+  const handleClose = () => {
+    setShowModal(false);
+  };
 
   const handleChenckboxChange = e => {
     const { checked } = e.target;
     setIsHost(checked);
+
+    fetch('/data/data.json', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8',
+      },
+      body: JSON.stringify(isHost),
+    })
+      .then(res => res.json())
+      .then(data => console.log('결과: ', data));
   };
 
   return (
-    <div className="modalContainer">
-      <div className="modalContentContainer">
+    <div className={`modalContainer ${showModal ? 'black' : 'white'}`}>
+      <div className={`modalContentContainer  ${showModal ? 'show' : 'hide'}`}>
         <header className="modalHeader">
           <button className="modalCloseButton">
-            <IoMdClose size={18} />
+            <IoMdClose size={18} onClick={handleClose} />
           </button>
           <p className="modalTitle">{title}</p>
         </header>

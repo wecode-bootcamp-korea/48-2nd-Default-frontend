@@ -1,14 +1,12 @@
-{
-  "data": [
-    {
-      "name": "박동철",
-      "email": "admin@gmail.com",
-      "password": "12345678"
-    },
-    {
-      "name": "김유저",
-      "email": "testuser@gmail.com",
-      "password": "12345678"
-    }
-  ]
-}
+[
+  {
+    "name": "박동철",
+    "email": "admin@gmail.com",
+    "password": "12345678"
+  },
+  {
+    "name": "김유저",
+    "email": "testuser@gmail.com",
+    "password": "12345678"
+  }
+]

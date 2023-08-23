@@ -9,7 +9,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: rgba(0, 0, 0, 0.7);
 
   .modalContentContainer {
     position: relative;
@@ -150,4 +149,28 @@
       }
     }
   }
+}
+
+.show {
+  position: absolute;
+  top: 0;
+  transform: translateY(0);
+  transition: all ease 2s;
+  opacity: 1;
+}
+
+.hide {
+  position: absolute;
+  top: 100vh;
+  transform: translateY(100vh);
+  transition: all ease 2s;
+  opacity: 0;
+}
+
+.black {
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+.white {
+  background-color: none;
 }
