@@ -3,7 +3,7 @@
   align-items: center;
   justify-content: center;
   gap: 14px;
-  padding: 16px 40px;
+  padding: 9px 40px;
   border: 1px solid #dddddd;
   border-color: rgb(229 229 229);
   border-radius: 9999px;
@@ -21,8 +21,16 @@
   }
 
   .searchIconBox {
-    width: 40px;
-    border: 1px solid red;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: red;
     border-radius: 50%;
+
+    .searchIcon {
+      color: white;
+    }
   }
 }
