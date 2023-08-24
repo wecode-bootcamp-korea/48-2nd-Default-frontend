@@ -5,9 +5,15 @@ import Logo from './Logo';
 import Search from './Search';
 import UserMenu from './UserMenu';
 import './Navbar.scss';
+import CountryList from './CountryList';
 
 const Navbar = () => {
   const [expanded, setExpanded] = useState(false);
+  const [isToggleCountryMenu, setIsToggleCountryMenu] = useState(false);
+
+  const handleToggleCountryMenu = () => {
+    setIsToggleCountryMenu(prev => !prev);
+  };
 
   const handleSearchClick = () => {
     setExpanded(prev => !prev);
@@ -26,7 +32,7 @@ const Navbar = () => {
             <p className="searchTitle">숙소</p>
             <div
               className="expandedSearchContainer"
-              onClick={handleSearchClick}
+              onClick={handleToggleCountryMenu}
             >
               <div className="searchCountryBox">
                 <p className="expandedSearchInputName">
@@ -38,6 +44,7 @@ const Navbar = () => {
                 <ImSearch className="expandedSearchIcon" size={14} />
                 <span className="searchText">검색</span>
               </div>
+              {isToggleCountryMenu && <CountryList />}
             </div>
           </div>
         )}

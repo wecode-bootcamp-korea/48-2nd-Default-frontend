@@ -19,11 +19,12 @@ const UserMenu = () => {
           <Avatar />
         </div>
       </div>
-
-      <div className={`menuListBox ${isToggleMenu ? 'menuShow' : 'menuHide'}`}>
-        <UserMenuItem className="menuList" text="로그인" />
-        <UserMenuItem className="menuList" text="회원가입" />
-      </div>
+      {isToggleMenu && (
+        <div className="menuListBox">
+          <UserMenuItem className="menuList" text="로그인" />
+          <UserMenuItem className="menuList" text="회원가입" />
+        </div>
+      )}
     </>
   );
 };
