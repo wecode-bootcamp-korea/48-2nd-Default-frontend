@@ -44,8 +44,8 @@ const Navbar = () => {
                 <ImSearch className="expandedSearchIcon" size={14} />
                 <span className="searchText">검색</span>
               </div>
-              {isToggleCountryMenu && <CountryList />}
             </div>
+            {isToggleCountryMenu && <CountryList />}
           </div>
         )}
         <UserMenu />

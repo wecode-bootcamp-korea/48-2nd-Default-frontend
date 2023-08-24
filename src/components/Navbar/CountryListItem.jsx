@@ -1,10 +1,11 @@
 import React from 'react';
 import './CountryListItem.scss';
 
-const CountryListItem = () => {
+const CountryListItem = ({ image, text, onClick }) => {
   return (
-    <div className="countryImg">
-      <img src="/images/map.png" alt="지도" />
+    <div className="countryImg" onClick={onClick}>
+      <img src={image} alt="지도" />
+      <p>{text}</p>
     </div>
   );
 };

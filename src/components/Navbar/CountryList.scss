@@ -1,6 +1,6 @@
-.countryLisContainer {
+.countryListContainer {
   position: absolute;
-  right: 36%;
+  right: 37.5%;
   top: 110%;
   width: 450px;
   height: auto;
@@ -9,6 +9,7 @@
   padding: 50px 0;
   font-weight: 600;
   box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.1);
+  white-space: wrap;
 
   .countryLisBox {
     max-width: 80%;
@@ -29,6 +30,5 @@
     align-items: center;
     justify-content: space-between;
     gap: 30px;
-    word-wrap: break-word;
   }
 }
