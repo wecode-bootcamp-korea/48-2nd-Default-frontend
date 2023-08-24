@@ -19,17 +19,13 @@ const Navbar = () => {
         <Link to="/">
           <Logo />
         </Link>
-        {!expanded && (
-          <Search expanded={expanded} handleSearchClick={handleSearchClick} />
-        )}
-
-        {expanded && (
+        {!expanded ? (
+          <Search handleSearchClick={handleSearchClick} />
+        ) : (
           <div className="fullExpanded">
             <p className="searchTitle">숙소</p>
             <div
-              className={`expandedSearchContainer ${
-                expanded ? 'expand' : 'hide'
-              }`}
+              className="expandedSearchContainer"
               onClick={handleSearchClick}
             >
               <div className="searchCountryBox">
