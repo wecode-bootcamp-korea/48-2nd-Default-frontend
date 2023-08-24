@@ -1,0 +1,101 @@
+import React, { useState, useEffect } from 'react';
+import { emailPattern } from '../../utils/constant';
+import Button from '../Button/Button';
+import Modal from './Modal';
+import './RegisterModal.scss';
+
+const RegisterModal = ({ onClose, handleRedirect }) => {
+  const [userInfo, setUserInfo] = useState({
+    name: '',
+    email: '',
+    password: '',
+  });
+
+  const { name, email, password } = userInfo;
+
+  const emailIsValid = emailPattern.test(email);
+  const passwordIsValid = password.length >= 5;
+  const isValid = emailIsValid && passwordIsValid;
+  const isDisabled = isValid && name !== '';
+
+  const handleInputChange = e => {
+    const { value, id } = e.target;
+    setUserInfo(prev => ({
+      ...prev,
+      [id]: value,
+    }));
+  };
+
+  const handleRegister = e => {
+    if (isValid) {
+      fetch('http://10.58.52.81:3000/user/signup', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json;charset=utf-8',
+        },
+        body: JSON.stringify(userInfo),
+      })
+        .then(res => res.json())
+        .then(data => console.log(data));
+    }
+  };
+
+  return (
+    <Modal
+      title="회원가입"
+      subTitle="Default에 오신 것을 환영합니다."
+      redirectText="로그인"
+      redirectLabel="이미 계정이 있으신가요?"
+      handleRedirect={handleRedirect}
+      onClose={onClose}
+    >
+      <div className="modalContent">
+        <form
+          className="registerModalInputBox"
+          onChange={handleInputChange}
+          onSubmit={handleRegister}
+        >
+          <div className="registerInputBox">
+            <input className="modalInput" type="text" id="name" value={name} />
+            <label className={`modalLabel ${name ? 'top' : ''}`} htmlFor="name">
+              Name
+            </label>
+          </div>
+
+          <div className="registerInputBox">
+            <input
+              className="modalInput"
+              type="text"
+              id="email"
+              value={email}
+            />
+            <label
+              className={`modalLabel ${email ? 'top' : ''}`}
+              htmlFor="email"
+            >
+              Email
+            </label>
+          </div>
+
+          <div className="registerInputBox">
+            <input
+              className="modalInput"
+              type="password"
+              id="password"
+              value={password}
+            />
+            <label
+              className={`modalLabel ${password ? 'top' : ''}`}
+              htmlFor="password"
+            >
+              Password
+            </label>
+          </div>
+          <Button text="계속" disabled={!isDisabled} onClick={handleRedirect} />
+        </form>
+      </div>
+    </Modal>
+  );
+};
+
+export default RegisterModal;
