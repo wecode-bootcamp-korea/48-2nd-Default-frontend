@@ -1,5 +1,5 @@
 import React from 'react';
-import { MdOutlineMeetingRoom } from 'react-icons/md';
+import { BiBed } from 'react-icons/bi';
 import './DetailPage.scss';
 
 const IMAGES = [
@@ -62,14 +62,29 @@ const DetailPage = () => {
             />
           </div>
           <div className="itemInfo">
-            <div>
-              <MdOutlineMeetingRoom size={18} />
-              <p>셀프 체크인</p>
+            <div className="infoIcon">
+              <BiBed size={30} />
+              <p className="infoIconText">셀프 체크인</p>
             </div>
-            <div />
-            <div />
+            <div className="infoIcon">
+              <BiBed size={30} />
+              <p className="infoIconText">유자님은 슈퍼호스트입니다</p>
+            </div>
+            <div className="infoIcon">
+              <BiBed size={30} />
+              <p className="infoIconText">
+                8월 26일 오후 12:00 전까지 무료로 취소하실 수 있습니다.
+              </p>
+            </div>
           </div>
-          <div className="place">침실 공간</div>
+          <div className="place">
+            <p className="placeInfoTitle">숙박 장소</p>
+            <div className="placeInfoContent">
+              <BiBed size={30} />
+              <p className="contentTitle">침실</p>
+              <p className="contentDetail">싱글 침대</p>
+            </div>
+          </div>
           <div className="convenient">숙소 편의시설</div>
           <div className="calendar">Yeongwol-gun에서 6박</div>
           <div className="review">

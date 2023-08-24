@@ -1,10 +1,9 @@
 .detailContainer {
   max-width: 60%;
   margin: 0 auto;
-  padding-top: 100px;
   display: flex;
   flex-direction: column;
-  gap: 30px;
+  gap: 48px;
 
   .detailHeader {
     display: flex;
@@ -47,7 +46,7 @@
       display: flex;
       flex-direction: column;
       justify-content: center;
-      gap: 10px;
+      gap: 32px;
 
       .hostInfoHeaderBox {
         display: flex;
@@ -67,6 +66,54 @@
           width: 40px;
           height: 40px;
           border-radius: 50%;
+        }
+      }
+
+      .itemInfo {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        border-top: 1px solid #ebebeb;
+        border-bottom: 1px solid #ebebeb;
+        padding: 32px 0;
+
+        .infoIcon {
+          display: flex;
+          align-items: center;
+          gap: 20px;
+
+          .infoIconText {
+            font-weight: bold;
+          }
+        }
+      }
+
+      .place {
+        display: flex;
+        flex-direction: column;
+        gap: 25px;
+
+        .placeInfoTitle {
+          font-size: 22px;
+          font-weight: bold;
+        }
+
+        .placeInfoContent {
+          display: flex;
+          flex-direction: column;
+          border: 1px solid #ebebeb;
+          border-radius: 12px;
+          padding: 24px;
+
+          .contentTitle {
+            margin-top: 16px;
+            margin-bottom: 10px;
+            font-weight: bold;
+          }
+
+          .contentDetail {
+            font-size: 14px;
+          }
         }
       }
     }
