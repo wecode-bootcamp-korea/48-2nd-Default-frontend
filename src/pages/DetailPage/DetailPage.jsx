@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { AiFillStar } from 'react-icons/ai';
 import { BiBed } from 'react-icons/bi';
 import Calendar from '../../components/Calendar/Calendar';
@@ -34,6 +34,14 @@ const IMAGES = [
 ];
 
 const DetailPage = () => {
+  useEffect(() => {
+    fetch('', {
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8',
+      },
+    }).then(res => res.json());
+  }, []);
+
   return (
     <div className="detailContainer">
       <div className="detailHeader">
@@ -79,6 +87,7 @@ const DetailPage = () => {
                 8월 26일 오후 12:00 전까지 무료로 취소하실 수 있습니다.
               </p>
             </div>
+            노트북
           </div>
           <div className="place">
             <h1 className="title">숙박 장소</h1>
