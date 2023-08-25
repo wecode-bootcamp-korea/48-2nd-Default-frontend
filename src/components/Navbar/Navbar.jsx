@@ -4,8 +4,8 @@ import { ImSearch } from 'react-icons/im';
 import Logo from './Logo';
 import Search from './Search';
 import UserMenu from './UserMenu';
-import './Navbar.scss';
 import CountryList from './CountryList';
+import './Navbar.scss';
 
 const Navbar = () => {
   const [expanded, setExpanded] = useState(false);
@@ -20,40 +20,37 @@ const Navbar = () => {
   };
 
   return (
-    <>
-      {/* <div className="backNavbar"></div> */}
-      <div className="navbarContainer">
-        <div className="navbarContentBox">
-          <Link to="/">
-            <Logo />
-          </Link>
-          {!expanded ? (
-            <Search handleSearchClick={handleSearchClick} />
-          ) : (
-            <div className="fullExpanded">
-              <p className="searchTitle">숙소</p>
-              <div
-                className="expandedSearchContainer"
-                onClick={handleToggleCountryMenu}
-              >
-                <div className="searchCountryBox">
-                  <p className="expandedSearchInputName">
-                    어느 나라로 여행하실래요?
-                  </p>
-                  <p>국가 검색</p>
-                </div>
-                <div className="expandedSearchIconBox">
-                  <ImSearch className="expandedSearchIcon" size={14} />
-                  <span className="searchText">검색</span>
-                </div>
+    <div className="navbarContainer">
+      <div className="navbarContentBox">
+        <Link to="/">
+          <Logo />
+        </Link>
+        {!expanded ? (
+          <Search handleSearchClick={handleSearchClick} />
+        ) : (
+          <div className="fullExpanded">
+            <p className="searchTitle">숙소</p>
+            <div
+              className="expandedSearchContainer"
+              onClick={handleToggleCountryMenu}
+            >
+              <div className="searchCountryBox">
+                <p className="expandedSearchInputName">
+                  어느 나라로 여행하실래요?
+                </p>
+                <p>국가 검색</p>
               </div>
-              {isToggleCountryMenu && <CountryList />}
+              <div className="expandedSearchIconBox">
+                <ImSearch className="expandedSearchIcon" size={14} />
+                <span className="searchText">검색</span>
+              </div>
             </div>
-          )}
-          <UserMenu />
-        </div>
+            {isToggleCountryMenu && <CountryList />}
+          </div>
+        )}
+        <UserMenu />
       </div>
-    </>
+    </div>
   );
 };
 
