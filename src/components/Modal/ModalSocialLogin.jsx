@@ -4,7 +4,7 @@ import { RiKakaoTalkFill } from 'react-icons/ri';
 import Button from '../Button/Button';
 import './ModalSocialLogin.scss';
 
-const navigate = url => {
+const move = url => {
   window.location.href = url;
 };
 
@@ -14,7 +14,7 @@ const auth = async () => {
   })
     .then(res => res.json())
     .then(data => {
-      navigate(data.url);
+      move(data.url);
     });
 };
 

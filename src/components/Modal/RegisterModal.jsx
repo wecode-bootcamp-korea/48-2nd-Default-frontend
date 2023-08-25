@@ -15,8 +15,7 @@ const RegisterModal = ({ onClose, handleRedirect }) => {
 
   const emailIsValid = emailPattern.test(email);
   const passwordIsValid = password.length >= 5;
-  const isValid = emailIsValid && passwordIsValid;
-  const isDisabled = isValid && name !== '';
+  const isValid = emailIsValid && passwordIsValid && name !== '';
 
   const handleInputChange = e => {
     const { value, id } = e.target;
@@ -27,17 +26,23 @@ const RegisterModal = ({ onClose, handleRedirect }) => {
   };
 
   const handleRegister = e => {
-    if (isValid) {
-      fetch('http://10.58.52.81:3000/user/signup', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json;charset=utf-8',
-        },
-        body: JSON.stringify(userInfo),
-      })
-        .then(res => res.json())
-        .then(data => console.log(data));
+    e.preventDefault();
+
+    if (!isValid) {
+      alert('입력 값을 확인해 주세요!');
+
+      return;
     }
+
+    fetch('http://10.58.52.81:3000/user/signup', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8',
+      },
+      body: JSON.stringify(userInfo),
+    })
+      .then(res => res.json())
+      .then(data => console.log(data));
   };
 
   return (
@@ -91,7 +96,7 @@ const RegisterModal = ({ onClose, handleRedirect }) => {
               Password
             </label>
           </div>
-          <Button text="계속" disabled={!isDisabled} onClick={handleRedirect} />
+          <Button text="계속" disabled={!isValid} />
         </form>
       </div>
     </Modal>
