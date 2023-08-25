@@ -87,7 +87,6 @@ const DetailPage = () => {
                 8월 26일 오후 12:00 전까지 무료로 취소하실 수 있습니다.
               </p>
             </div>
-            노트북
           </div>
           <div className="place">
             <h1 className="title">숙박 장소</h1>
