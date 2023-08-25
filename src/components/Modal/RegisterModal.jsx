@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { emailPattern } from '../../utils/constant';
 import Button from '../Button/Button';
 import Modal from './Modal';
