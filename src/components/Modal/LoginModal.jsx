@@ -9,9 +9,7 @@ const LoginModal = ({ onClose, handleRedirect }) => {
     email: '',
     password: '',
   });
-
   const { email, password } = loginUserInfo;
-
   const isEmailIsValid = emailPattern.test(email);
   const isPasswordIsValid = password.length >= 5;
   const isValid = isEmailIsValid && isPasswordIsValid;

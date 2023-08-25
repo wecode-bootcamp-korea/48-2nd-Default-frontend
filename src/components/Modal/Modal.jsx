@@ -30,7 +30,7 @@ const Modal = ({
   };
 
   return (
-    <div className="modalContainer black">
+    <div className="modalContainer black" onClick={onClose}>
       <div className="modalContentContainer">
         <header className="modalHeader">
           <button className="modalCloseButton">

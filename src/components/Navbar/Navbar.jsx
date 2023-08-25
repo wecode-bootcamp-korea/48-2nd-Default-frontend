@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ImSearch } from 'react-icons/im';
+import useOutsideClick from '../../hooks/useClickOutside';
 import Logo from './Logo';
 import Search from './Search';
 import UserMenu from './UserMenu';
@@ -10,18 +11,24 @@ import './Navbar.scss';
 const Navbar = () => {
   const [expanded, setExpanded] = useState(false);
   const [isToggleCountryMenu, setIsToggleCountryMenu] = useState(false);
+  const navbarContentRef = useRef();
 
   const handleToggleCountryMenu = () => {
     setIsToggleCountryMenu(prev => !prev);
   };
 
   const handleSearchClick = () => {
-    setExpanded(prev => !prev);
+    setExpanded(true);
   };
+
+  useOutsideClick(navbarContentRef, () => {
+    setExpanded(false);
+    setIsToggleCountryMenu(false);
+  });
 
   return (
     <div className="navbarContainer">
-      <div className="navbarContentBox">
+      <div className="navbarContentBox" ref={navbarContentRef}>
         <Link to="/">
           <Logo />
         </Link>

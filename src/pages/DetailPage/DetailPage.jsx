@@ -2,8 +2,9 @@ import React, { useEffect } from 'react';
 import { AiFillStar } from 'react-icons/ai';
 import { BiBed } from 'react-icons/bi';
 import Calendar from '../../components/Calendar/Calendar';
-import './DetailPage.scss';
 import ReviewItem from '../../components/Detail/ReviewItem';
+import ReservationBox from '../../components/Detail/ReservationBox';
+import './DetailPage.scss';
 
 const IMAGES = [
   {
@@ -133,7 +134,9 @@ const DetailPage = () => {
             </div>
           </div>
         </div>
-        <div className="paymentContainer">hihi</div>
+        <div className="paymentContainer">
+          <ReservationBox />
+        </div>
       </div>
     </div>
   );

@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { AiOutlineMenu } from 'react-icons/ai';
+import useOutsideClick from '../../hooks/useClickOutside';
 import LoginModal from '../Modal/LoginModal';
 import RegisterModal from '../Modal/RegisterModal';
 import Avatar from './Avatar';
@@ -9,6 +10,7 @@ import './UserMenu.scss';
 const UserMenu = () => {
   const [isToggleMenu, setIsToggleMenu] = useState(false);
   const [modalStatus, setModalStatus] = useState();
+  const menuRef = useRef();
 
   const MODAL_MAP = {
     login: (
@@ -29,6 +31,20 @@ const UserMenu = () => {
     setIsToggleMenu(prev => !prev);
   };
 
+  useOutsideClick(menuRef, () => {
+    setIsToggleMenu(false);
+  });
+
+  const handleLogin = () => {
+    setModalStatus('login');
+    setIsToggleMenu(false);
+  };
+
+  const handleRegister = () => {
+    setModalStatus('register');
+    setIsToggleMenu(false);
+  };
+
   return (
     <>
       {MODAL_MAP[modalStatus]}
@@ -39,16 +55,16 @@ const UserMenu = () => {
         </div>
       </div>
       {isToggleMenu && (
-        <div className="menuListBox">
+        <div className="menuListBox" ref={menuRef}>
           <UserMenuItem
             className="menuList"
             text="로그인"
-            onClick={() => setModalStatus('login')}
+            onClick={handleLogin}
           />
           <UserMenuItem
             className="menuList"
             text="회원가입"
-            onClick={() => setModalStatus('register')}
+            onClick={handleRegister}
           />
         </div>
       )}
