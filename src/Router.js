@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { ModalProvider } from './context/ModalContext';
 import DetailPage from './pages/DetailPage/DetailPage';
 import Navbar from './components/Navbar/Navbar';
 import Main from './pages/Main/Main';
@@ -12,7 +13,7 @@ const Router = () => {
       <WireFrame />
       <Routes>
         <Route path="/" element={<Main />} />
-        <Route path="/detail" element={<DetailPage />} />
+        <Route path="/detail/:id" element={<DetailPage />} />
       </Routes>
     </BrowserRouter>
   );
