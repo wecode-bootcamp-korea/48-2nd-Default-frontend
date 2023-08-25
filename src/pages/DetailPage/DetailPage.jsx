@@ -1,6 +1,9 @@
 import React from 'react';
+import { AiFillStar } from 'react-icons/ai';
 import { BiBed } from 'react-icons/bi';
+import Calendar from '../../components/Calendar/Calendar';
 import './DetailPage.scss';
+import ReviewItem from '../../components/Detail/ReviewItem';
 
 const IMAGES = [
   {
@@ -53,7 +56,7 @@ const DetailPage = () => {
         <div className="hostInfo">
           <div className="hostInfoHeaderBox">
             <div className="hostInfoHeader">
-              <h1>Geumju 님이 호스팅하는 통나무집 전체</h1>
+              <h1 className="title">Geumju 님이 호스팅하는 통나무집 전체</h1>
               <p className="subtitle">최대 인원 7명침실 2개침대 4개욕실 0개</p>
             </div>
             <img
@@ -78,20 +81,51 @@ const DetailPage = () => {
             </div>
           </div>
           <div className="place">
-            <p className="placeInfoTitle">숙박 장소</p>
+            <h1 className="title">숙박 장소</h1>
             <div className="placeInfoContent">
               <BiBed size={30} />
               <p className="contentTitle">침실</p>
-              <p className="contentDetail">싱글 침대</p>
+              <p className="contentDetail">퀸사이즈 침대 1개</p>
             </div>
           </div>
-          <div className="convenient">숙소 편의시설</div>
-          <div className="calendar">Yeongwol-gun에서 6박</div>
+          <div className="convenient">
+            <h1 className="title">숙소 편의시설</h1>
+            <div className="convenientContent">
+              <div className="contentIcon">
+                <BiBed size={30} />
+                <p>강 전망</p>
+              </div>
+              <div className="contentIcon">
+                <BiBed size={30} />
+                <p>전용 온수 욕조</p>
+              </div>
+              <div className="contentIcon">
+                <BiBed size={30} />
+                <p>공용 수영장</p>
+              </div>
+              <div className="contentIcon">
+                <BiBed size={30} />
+                <p>140인치 HDTV</p>
+              </div>
+            </div>
+          </div>
+          <div className="calendarReservation">
+            <h1 className="title">Yeongwol-gun에서 6박</h1>
+            <Calendar />
+          </div>
           <div className="review">
-            650개 후기에서 별 5개 만점에 4.96개 4.96 · 후기 650개
+            <div className="reviewHeader">
+              <AiFillStar size={22} />
+              <p>4.90</p>
+              <p>후기 240개</p>
+            </div>
+            <div className="reviewContent">
+              <ReviewItem />
+              <ReviewItem />
+            </div>
           </div>
         </div>
-        <div className="pay">hihi</div>
+        <div className="paymentContainer">hihi</div>
       </div>
     </div>
   );
