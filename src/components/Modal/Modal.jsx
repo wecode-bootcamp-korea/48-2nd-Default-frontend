@@ -31,7 +31,7 @@ const Modal = ({
 
   return (
     <div className="modalContainer black" onClick={onClose}>
-      <div className="modalContentContainer">
+      <div className="modalContentContainer" onClick={e => e.stopPropagation()}>
         <header className="modalHeader">
           <button className="modalCloseButton">
             <IoMdClose size={18} onClick={onClose} />
