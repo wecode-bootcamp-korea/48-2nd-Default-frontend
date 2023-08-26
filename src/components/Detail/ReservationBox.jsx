@@ -44,7 +44,7 @@ const ReservationBox = () => {
           </button>
           <button
             className="reserveBtn"
-            onClick={navigate('/payment')}
+            onClick={() => navigate('/payment')}
             onMouseMove={handleMouseMove}
             style={{
               background: `radial-gradient(circle at ${gradientPosition.x}px ${gradientPosition.y}px, #FF385C, #E61E4D, #E31C5F, #D70466, #BD1E59, #BD1E59)`,
