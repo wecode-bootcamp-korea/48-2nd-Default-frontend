@@ -30,7 +30,8 @@ const ReservationBox = ({
     <div className="reservationContainer">
       <div className="reservationHeader">
         <p className="priceBox">
-          <b className="price">￦360,000</b> / 박
+          <b className="price">￦360,000</b>
+          <span className="night">/ 박</span>
         </p>
         <div className="rating">
           <AiFillStar />
@@ -72,7 +73,7 @@ const ReservationBox = ({
         <p className="subText">예약 확정 전에는 요금이 청구되지 않습니다.</p>
         <div className="reservationInfoBox">
           <div className="reservationInfo">
-            <p>￦36,000 x 5박</p>
+            <p>￦360,000 x 5박</p>
             <p>￦1,800,000</p>
           </div>
           <div className="reservationInfo">

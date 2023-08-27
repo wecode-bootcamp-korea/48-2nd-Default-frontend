@@ -35,6 +35,11 @@ const IMAGES = [
   },
 ];
 
+const REVIEWS = [
+  { id: 1, name: '용준', date: '2023년 8월', text: '최고의 숙소' },
+  { id: 2, name: '인재', date: '2023년 9월', text: '최악의 숙소' },
+];
+
 const DetailPage = () => {
   const [isCalendarOpen, setIsCalendarOpen] = useState(false);
   const [selectedStartDate, setSelectedStartDate] = useState(null);
@@ -88,7 +93,10 @@ const DetailPage = () => {
               <div className="hostInfoHeader">
                 <h1 className="title">Geumju 님이 호스팅하는 통나무집 전체</h1>
                 <p className="subtitle">
-                  최대 인원 7명침실 2개침대 4개욕실 0개
+                  <span>최대 인원 7명</span>
+                  <span>침실 2개</span>
+                  <span>침대 4개</span>
+                  <span>욕실 0개</span>
                 </p>
               </div>
               <img
@@ -157,7 +165,7 @@ const DetailPage = () => {
               selectedStartDate={selectedStartDate}
               selectedEndDate={selectedEndDate}
             />
-            <div ref={calendarRef}>
+            <div className="reservationCalendarBox" ref={calendarRef}>
               {isCalendarOpen && (
                 <Calendar
                   className="calendarModal"
@@ -176,11 +184,17 @@ const DetailPage = () => {
         <div className="reviewHeader">
           <AiFillStar size={22} />
           <p>4.90</p>
-          <p>후기 240개</p>
+          <p>후기 {REVIEWS.length}개</p>
         </div>
         <div className="reviewContent">
-          <ReviewItem />
-          <ReviewItem />
+          {REVIEWS.map(review => (
+            <ReviewItem
+              key={review.id}
+              name={review.name}
+              date={review.date}
+              text={review.text}
+            />
+          ))}
         </div>
       </div>
     </div>

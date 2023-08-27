@@ -1,10 +1,12 @@
 .detail {
   max-width: 70%;
+  width: 100%;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
 
   .detailContainer {
+    width: 100%;
     display: flex;
     flex-direction: column;
     gap: 48px;
@@ -22,6 +24,7 @@
     }
 
     .detailImageBox {
+      width: 100%;
       height: 500px;
       display: grid;
       grid-template-columns: 2fr 1fr 1fr;
@@ -40,8 +43,9 @@
     }
 
     .detailContentBox {
+      width: 100%;
       display: grid;
-      grid-template-columns: 5fr 3fr;
+      grid-template-columns: 2fr 1fr;
       column-gap: 100px;
 
       &:nth-child(2) {
@@ -49,6 +53,7 @@
       }
 
       .hostInfo {
+        width: 100%;
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -62,6 +67,16 @@
             display: flex;
             flex-direction: column;
             gap: 15px;
+
+            .title {
+              font-size: 23px;
+            }
+
+            .subtitle {
+              display: flex;
+              align-items: center;
+              gap: 10px;
+            }
           }
 
           img {
@@ -149,7 +164,7 @@
         }
 
         .calendarReservation {
-          width: 100%t;
+          width: 100%;
           display: flex;
           flex-direction: column;
           gap: 20px;
@@ -157,6 +172,28 @@
           .calendarTitle {
             font-size: 22px;
             font-weight: bold;
+          }
+        }
+      }
+
+      .paymentContainer {
+        width: 100%;
+
+        .reservationCalendarBox {
+          position: relative;
+
+          .calendarModal {
+            position: absolute;
+            top: -263px;
+            right: 44px;
+            width: 600px;
+            border: 1px solid rgb(221, 221, 221);
+            border-radius: 10px;
+            padding-bottom: 50px;
+            background-color: white;
+            box-shadow:
+              0 4px 6px 3px rgb(0 0 0 / 0.1),
+              0 2px 4px -2px rgb(0 0 0 / 0.1);
           }
         }
       }
