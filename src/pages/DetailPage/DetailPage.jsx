@@ -37,6 +37,8 @@ const IMAGES = [
 
 const DetailPage = () => {
   const [isCalendarOpen, setIsCalendarOpen] = useState(false);
+  const [selectedStartDate, setSelectedStartDate] = useState(null);
+  const [selectedEndDate, setSelectedEndDate] = useState(null);
   const calendarRef = useRef();
 
   useOutsideClick(calendarRef, () => {
@@ -50,6 +52,16 @@ const DetailPage = () => {
       },
     }).then(res => res.json());
   }, []);
+
+  const calculateNights = () => {
+    if (!selectedStartDate || !selectedEndDate) {
+      return 0;
+    }
+
+    const timeDiff = selectedEndDate - selectedStartDate;
+    const daysDiff = timeDiff / (1000 * 60 * 60 * 24);
+    return Math.floor(daysDiff);
+  };
 
   return (
     <div className="detail">
@@ -130,14 +142,31 @@ const DetailPage = () => {
               </div>
             </div>
             <div className="calendarReservation">
-              <h1 className="title">Yeongwol-gun에서 6박</h1>
-              <Calendar />
+              <h1 className="title">Yeongwol-gun에서 {calculateNights()}박</h1>
+              <Calendar
+                selectedStartDate={selectedStartDate}
+                selectedEndDate={selectedEndDate}
+                setSelectedEndDate={setSelectedEndDate}
+                setSelectedStartDate={setSelectedStartDate}
+              />
             </div>
           </div>
           <div className="paymentContainer">
-            <ReservationBox setIsCalendarOpen={setIsCalendarOpen} />
+            <ReservationBox
+              setIsCalendarOpen={setIsCalendarOpen}
+              selectedStartDate={selectedStartDate}
+              selectedEndDate={selectedEndDate}
+            />
             <div ref={calendarRef}>
-              {isCalendarOpen && <Calendar className="calendarModal" />}
+              {isCalendarOpen && (
+                <Calendar
+                  className="calendarModal"
+                  selectedStartDate={selectedStartDate}
+                  selectedEndDate={selectedEndDate}
+                  setSelectedEndDate={setSelectedEndDate}
+                  setSelectedStartDate={setSelectedStartDate}
+                />
+              )}
             </div>
           </div>
         </div>

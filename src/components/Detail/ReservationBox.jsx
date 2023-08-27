@@ -3,7 +3,11 @@ import { useNavigate } from 'react-router-dom';
 import { AiFillStar } from 'react-icons/ai';
 import './ReservationBox.scss';
 
-const ReservationBox = ({ setIsCalendarOpen }) => {
+const ReservationBox = ({
+  setIsCalendarOpen,
+  selectedStartDate,
+  selectedEndDate,
+}) => {
   const [gradientPosition, setGradientPosition] = useState({ x: 0, y: 0 });
   const navigate = useNavigate();
 
@@ -39,11 +43,19 @@ const ReservationBox = ({ setIsCalendarOpen }) => {
           <button className="checkDate" onClick={handleCalendarOpen}>
             <div>
               <p>체크인</p>
-              <p>2023.9.5</p>
+              <p>
+                {selectedStartDate
+                  ? selectedStartDate.toLocaleDateString()
+                  : '날짜 선택'}
+              </p>
             </div>
             <div>
               <p>체크아웃</p>
-              <p>2023.9.8</p>
+              <p>
+                {selectedEndDate
+                  ? selectedEndDate.toLocaleDateString()
+                  : '날짜 선택'}
+              </p>
             </div>
           </button>
           <button
