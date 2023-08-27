@@ -5,6 +5,7 @@ import RegisterModal from '../Modal/RegisterModal';
 import Avatar from './Avatar';
 import UserMenuItem from './UserMenuItem';
 import './UserMenu.scss';
+import Cookies from 'js-cookie';
 
 const UserMenu = () => {
   const [isToggleMenu, setIsToggleMenu] = useState(false);
@@ -31,6 +32,12 @@ const UserMenu = () => {
     setIsToggleMenu(prev => !prev);
   };
 
+  const handleLogOut = () => {
+    Cookies.remove('isLoggedIn');
+    localStorage.removeItem('accessToken');
+    setIsLoggedIn(false);
+  };
+
   return (
     <>
       {MODAL_MAP[modalStatus]}
@@ -41,7 +48,7 @@ const UserMenu = () => {
         </div>
       </div>
       {isLoggedIn ? (
-        <button onClick={() => setIsLoggedIn(false)}>로그아웃</button>
+        <button onClick={handleLogOut}>로그아웃</button>
       ) : (
         isToggleMenu && (
           <div className="menuListBox">
