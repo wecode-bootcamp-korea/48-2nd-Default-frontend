@@ -4,7 +4,7 @@ import Button from '../Button/Button';
 import Modal from './Modal';
 import './LoginModal.scss';
 
-const LoginModal = ({ onClose, handleRedirect }) => {
+const LoginModal = ({ onClose, handleRedirect, setIsLoggedIn }) => {
   const [loginUserInfo, setLoginUserInfo] = useState({
     email: '',
     password: '',
@@ -29,6 +29,7 @@ const LoginModal = ({ onClose, handleRedirect }) => {
       .then(data => {
         if (data.accessToken) {
           localStorage.setItem('accessToken', data.accessToken);
+          setIsLoggedIn(true);
         }
         console.log(data);
       });
