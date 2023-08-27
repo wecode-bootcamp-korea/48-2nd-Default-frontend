@@ -1,9 +1,10 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { AiFillStar } from 'react-icons/ai';
 import { BiBed } from 'react-icons/bi';
 import Calendar from '../../components/Calendar/Calendar';
 import ReviewItem from '../../components/Detail/ReviewItem';
 import ReservationBox from '../../components/Detail/ReservationBox';
+import useOutsideClick from '../../hooks/useClickOutside';
 import './DetailPage.scss';
 
 const IMAGES = [
@@ -35,6 +36,13 @@ const IMAGES = [
 ];
 
 const DetailPage = () => {
+  const [isCalendarOpen, setIsCalendarOpen] = useState(false);
+  const calendarRef = useRef();
+
+  useOutsideClick(calendarRef, () => {
+    setIsCalendarOpen(false);
+  });
+
   useEffect(() => {
     fetch('', {
       headers: {
@@ -127,7 +135,10 @@ const DetailPage = () => {
             </div>
           </div>
           <div className="paymentContainer">
-            <ReservationBox />
+            <ReservationBox setIsCalendarOpen={setIsCalendarOpen} />
+            <div ref={calendarRef}>
+              {isCalendarOpen && <Calendar className="calendarModal" />}
+            </div>
           </div>
         </div>
       </div>

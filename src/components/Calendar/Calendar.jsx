@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './Calendar.scss';
 
-const Calendar = () => {
+const Calendar = ({ className }) => {
   const today = new Date();
   const [currentMonth, setCurrentMonth] = useState(today.getMonth());
   const [currentYear, setCurrentYear] = useState(today.getFullYear());
@@ -106,7 +106,7 @@ const Calendar = () => {
   };
 
   return (
-    <div className="calendarContainer">
+    <div className={`calendarContainer ${className}`}>
       <div className="calendarHeader">
         <button
           className="arrowBtn"

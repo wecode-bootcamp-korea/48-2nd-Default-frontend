@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { AiFillStar } from 'react-icons/ai';
 import './ReservationBox.scss';
 
-const ReservationBox = () => {
+const ReservationBox = ({ setIsCalendarOpen }) => {
   const [gradientPosition, setGradientPosition] = useState({ x: 0, y: 0 });
   const navigate = useNavigate();
 
@@ -12,6 +12,10 @@ const ReservationBox = () => {
     const y = event.nativeEvent.offsetY;
 
     setGradientPosition({ x, y });
+  };
+
+  const handleCalendarOpen = () => {
+    setIsCalendarOpen(prev => !prev);
   };
 
   const handleReservationSubmit = e => {
@@ -32,7 +36,7 @@ const ReservationBox = () => {
       </div>
       <div className="reservationBody">
         <form className="checkDateBox" onSubmit={handleReservationSubmit}>
-          <button className="checkDate">
+          <button className="checkDate" onClick={handleCalendarOpen}>
             <div>
               <p>체크인</p>
               <p>2023.9.5</p>
