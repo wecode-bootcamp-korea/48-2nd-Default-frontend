@@ -16,7 +16,7 @@ const LoginModal = ({ onClose, handleRedirect }) => {
 
   const handleLogin = e => {
     e.preventDefault();
-    fetch('http://10.58.52.81:3000/user/signin', {
+    fetch('http://10.58.52.211:3000/user/signin', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',

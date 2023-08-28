@@ -34,7 +34,7 @@ const RegisterModal = ({ onClose, handleRedirect }) => {
       return;
     }
 
-    fetch('http://10.58.52.81:3000/user/signup', {
+    fetch('http://10.58.52.211:3000/user/signup', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
