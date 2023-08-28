@@ -34,15 +34,23 @@ const RegisterModal = ({ onClose, handleRedirect }) => {
       return;
     }
 
-    fetch('http://10.58.52.81:3000/user/signup', {
+    handleRedirect();
+
+    fetch('http://10.58.52.211:3000/user/signup', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
       },
       body: JSON.stringify(userInfo),
     })
-      .then(res => res.json())
-      .then(data => console.log(data));
+      .then(res => {
+        if (res.ok) handleRedirect();
+
+        return res.json();
+      })
+      .then(data => {
+        // 에러 분기처리
+      });
   };
 
   return (
