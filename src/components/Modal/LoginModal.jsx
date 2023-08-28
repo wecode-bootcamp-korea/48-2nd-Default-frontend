@@ -27,8 +27,8 @@ const LoginModal = ({ onClose, handleRedirect }) => {
       .then(data => {
         if (data.accessToken) {
           localStorage.setItem('accessToken', data.accessToken);
+          onClose();
         }
-        console.log(data);
       });
   };
 

@@ -8,7 +8,7 @@ export const IMAGES = [
   },
   {
     id: 2,
-    src: 'https://a0.muscache.com/im/pictures/5874cae5-198f-4301-91af-d3eb137dd6c4.jpg?im_w=960',
+    src: 'https://files.slack.com/files-pri/TH0U6FBTN-F05PNMRGXPF/_______________________________2023-08-28_________________11.27.15.png',
     alt: '상품 상세',
   },
   {

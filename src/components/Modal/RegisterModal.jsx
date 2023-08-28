@@ -30,7 +30,6 @@ const RegisterModal = ({ onClose, handleRedirect }) => {
 
     if (!isValid) {
       alert('입력 값을 확인해 주세요!');
-
       return;
     }
 
