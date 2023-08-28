@@ -48,7 +48,16 @@ const UserMenu = () => {
         </div>
       </div>
       {isLoggedIn ? (
-        <button onClick={handleLogOut}>로그아웃</button>
+        <div className="menuListBox">
+          <UserMenuItem
+            className="menuList"
+            text="로그아웃"
+            onClick={() => {
+              handleLogOut();
+              // setModalStatus('');
+            }}
+          />
+        </div>
       ) : (
         isToggleMenu && (
           <div className="menuListBox">

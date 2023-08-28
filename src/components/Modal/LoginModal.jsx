@@ -19,7 +19,7 @@ const LoginModal = ({ onClose, handleRedirect, setIsLoggedIn }) => {
 
   const handleLogin = e => {
     e.preventDefault();
-    fetch('http://10.58.52.81:3000/user/signin', {
+    fetch('http://10.58.52.211:3000/user/signin', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
@@ -30,7 +30,7 @@ const LoginModal = ({ onClose, handleRedirect, setIsLoggedIn }) => {
       .then(data => {
         if (data.accessToken) {
           localStorage.setItem('accessToken', data.accessToken);
-          Cookies.set('isLoggedIn', 'true');
+          Cookies.set('accessToken', data.accessToken);
           setIsLoggedIn(true);
         }
         console.log(data);
@@ -55,7 +55,7 @@ const LoginModal = ({ onClose, handleRedirect, setIsLoggedIn }) => {
       onClose={onClose}
     >
       <div className="modalContent">
-        <div
+        <form
           className="loginModalInputBox"
           onChange={handleInputChange}
           onSubmit={handleLogin}
@@ -91,7 +91,7 @@ const LoginModal = ({ onClose, handleRedirect, setIsLoggedIn }) => {
           </div>
 
           <Button text="계속" disabled={!isValid} />
-        </div>
+        </form>
       </div>
     </Modal>
   );
