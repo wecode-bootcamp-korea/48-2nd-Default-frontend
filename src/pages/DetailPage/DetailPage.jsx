@@ -5,40 +5,9 @@ import Calendar from '../../components/Calendar/Calendar';
 import ReviewItem from '../../components/Detail/ReviewItem';
 import ReservationBox from '../../components/Detail/ReservationBox';
 import useOutsideClick from '../../hooks/useClickOutside';
+import { REVIEWS } from '../../utils/constant';
+import { IMAGES } from '../../utils/constant';
 import './DetailPage.scss';
-
-const IMAGES = [
-  {
-    id: 1,
-    src: 'https://a0.muscache.com/im/pictures/5874cae5-198f-4301-91af-d3eb137dd6c4.jpg?im_w=960',
-    alt: '상품 상세',
-  },
-  {
-    id: 2,
-    src: 'https://a0.muscache.com/im/pictures/5874cae5-198f-4301-91af-d3eb137dd6c4.jpg?im_w=960',
-    alt: '상품 상세',
-  },
-  {
-    id: 3,
-    src: 'https://a0.muscache.com/im/pictures/5874cae5-198f-4301-91af-d3eb137dd6c4.jpg?im_w=960',
-    alt: '상품 상세',
-  },
-  {
-    id: 4,
-    src: 'https://a0.muscache.com/im/pictures/5874cae5-198f-4301-91af-d3eb137dd6c4.jpg?im_w=960',
-    alt: '상품 상세',
-  },
-  {
-    id: 5,
-    src: 'https://a0.muscache.com/im/pictures/5874cae5-198f-4301-91af-d3eb137dd6c4.jpg?im_w=960',
-    alt: '상품 상세',
-  },
-];
-
-const REVIEWS = [
-  { id: 1, name: '용준', date: '2023년 8월', text: '최고의 숙소' },
-  { id: 2, name: '인재', date: '2023년 9월', text: '최악의 숙소' },
-];
 
 const DetailPage = () => {
   const [isCalendarOpen, setIsCalendarOpen] = useState(false);
@@ -161,6 +130,7 @@ const DetailPage = () => {
           </div>
           <div className="paymentContainer">
             <ReservationBox
+              calculateNights={calculateNights()}
               setIsCalendarOpen={setIsCalendarOpen}
               selectedStartDate={selectedStartDate}
               selectedEndDate={selectedEndDate}
