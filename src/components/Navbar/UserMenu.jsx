@@ -5,7 +5,6 @@ import RegisterModal from '../Modal/RegisterModal';
 import Avatar from './Avatar';
 import UserMenuItem from './UserMenuItem';
 import './UserMenu.scss';
-import Cookies from 'js-cookie';
 
 const UserMenu = () => {
   const [isToggleMenu, setIsToggleMenu] = useState(false);
@@ -33,7 +32,6 @@ const UserMenu = () => {
   };
 
   const handleLogOut = () => {
-    Cookies.remove('isLoggedIn');
     localStorage.removeItem('accessToken');
     setIsLoggedIn(false);
   };

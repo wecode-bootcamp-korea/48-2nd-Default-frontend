@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import Cookies from 'js-cookie';
 import { emailPattern } from '../../utils/constant';
 import Button from '../Button/Button';
 import Modal from './Modal';
@@ -30,7 +29,6 @@ const LoginModal = ({ onClose, handleRedirect, setIsLoggedIn }) => {
       .then(data => {
         if (data.accessToken) {
           localStorage.setItem('accessToken', data.accessToken);
-          Cookies.set('accessToken', data.accessToken);
           setIsLoggedIn(true);
         }
         console.log(data);
