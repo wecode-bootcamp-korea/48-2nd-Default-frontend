@@ -1,16 +1,18 @@
 import { useEffect } from 'react';
 
-const useOutsideClick = (ref, callback) => {
+const useOutsideClick = (ref, callback, exceptionRef) => {
   const handleClick = e => {
-    if (ref.current && !ref.current.contains(e.target)) {
+    if (exceptionRef?.current.contains(e.target)) return;
+
+    if (!ref.current?.contains(e.target)) {
       callback();
     }
   };
 
   useEffect(() => {
-    document.addEventListener('mousedown', handleClick);
+    document.addEventListener('click', handleClick);
     return () => {
-      document.removeEventListener('mousedown', handleClick);
+      document.removeEventListener('click', handleClick);
     };
   }, [ref, callback]);
 };

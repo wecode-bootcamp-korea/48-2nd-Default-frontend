@@ -14,10 +14,15 @@ const DetailPage = () => {
   const [selectedStartDate, setSelectedStartDate] = useState(null);
   const [selectedEndDate, setSelectedEndDate] = useState(null);
   const calendarRef = useRef();
+  const dateSelectRef = useRef();
 
-  useOutsideClick(calendarRef, () => {
-    setIsCalendarOpen(false);
-  });
+  useOutsideClick(
+    calendarRef,
+    () => {
+      setIsCalendarOpen(false);
+    },
+    dateSelectRef,
+  );
 
   useEffect(() => {
     fetch('/data/data.json', {
@@ -138,10 +143,11 @@ const DetailPage = () => {
             </div>
             <div className="paymentContainer">
               <ReservationBox
-                calculateNights={calculateNights()}
+                calculatedNights={calculateNights()}
                 setIsCalendarOpen={setIsCalendarOpen}
                 selectedStartDate={selectedStartDate}
                 selectedEndDate={selectedEndDate}
+                ref={dateSelectRef}
               />
               <div className="reservationCalendarBox" ref={calendarRef}>
                 {isCalendarOpen && (

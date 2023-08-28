@@ -11,6 +11,7 @@ const UserMenu = () => {
   const [isToggleMenu, setIsToggleMenu] = useState(false);
   const [modalStatus, setModalStatus] = useState();
   const menuRef = useRef();
+  const exceptionRef = useRef();
 
   const MODAL_MAP = {
     login: (
@@ -31,9 +32,13 @@ const UserMenu = () => {
     setIsToggleMenu(prev => !prev);
   };
 
-  useOutsideClick(menuRef, () => {
-    setIsToggleMenu(false);
-  });
+  useOutsideClick(
+    menuRef,
+    () => {
+      setIsToggleMenu(false);
+    },
+    exceptionRef,
+  );
 
   const handleLogin = () => {
     setModalStatus('login');
@@ -48,7 +53,11 @@ const UserMenu = () => {
   return (
     <>
       {MODAL_MAP[modalStatus]}
-      <div className="iconBox" onClick={handleToggleUserMenu}>
+      <div
+        className="iconBox"
+        onClick={handleToggleUserMenu}
+        ref={exceptionRef}
+      >
         <AiOutlineMenu />
         <div className="avatarIcon">
           <Avatar />
