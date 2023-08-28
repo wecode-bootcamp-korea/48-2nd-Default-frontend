@@ -30,13 +30,13 @@ const ReservationBox = ({
 
   const price = 360000;
   const pricePerNight = price.toLocaleString();
+  const commission = 279531;
 
   const totalPrice = () => {
     if (!selectedStartDate || !selectedEndDate) {
       return 0;
     }
-    const numericPricePerNight = parseInt(pricePerNight.replace(/,/g, ''), 10);
-    return (numericPricePerNight * calculateNights).toLocaleString();
+    return price * calculateNights;
   };
 
   return (
@@ -89,17 +89,17 @@ const ReservationBox = ({
             <p>
               ￦{pricePerNight} x {calculateNights}박
             </p>
-            <p>￦{totalPrice()}</p>
+            <p>￦{totalPrice().toLocaleString()}</p>
           </div>
           <div className="reservationInfo">
             <p>에어비앤비 서비스 수수료</p>
-            <p>￦279,531</p>
+            <p>￦{commission.toLocaleString()}</p>
           </div>
         </div>
       </div>
       <div className="reservationFooter">
         <p>총 합계</p>
-        <p>￦2,079,531</p>
+        <p>￦{(totalPrice() + commission).toLocaleString()}</p>
       </div>
     </div>
   );
