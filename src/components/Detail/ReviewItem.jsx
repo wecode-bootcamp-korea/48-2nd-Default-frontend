@@ -1,7 +1,7 @@
 import React from 'react';
 import './ReviewItem.scss';
 
-const ReviewItem = () => {
+const ReviewItem = ({ name, date, text }) => {
   return (
     <div className="reviewItemContainer">
       <div className="reviewItemHeader">
@@ -11,12 +11,12 @@ const ReviewItem = () => {
           alt="프로필"
         />
         <div className="reviewItemProfile">
-          <p className="name">용준</p>
-          <p className="date">2023년 8월</p>
+          <p className="name">{name}</p>
+          <p className="date">{date}</p>
         </div>
       </div>
       <div className="reviewContent">
-        <span>최고의숙소</span>
+        <span>{text}</span>
       </div>
     </div>
   );

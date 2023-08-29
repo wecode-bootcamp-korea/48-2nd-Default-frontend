@@ -9,30 +9,31 @@ const LoginModal = ({ onClose, handleRedirect, setIsLoggedIn }) => {
     email: '',
     password: '',
   });
-
   const { email, password } = loginUserInfo;
-
   const isEmailIsValid = emailPattern.test(email);
   const isPasswordIsValid = password.length >= 5;
   const isValid = isEmailIsValid && isPasswordIsValid;
 
   const handleLogin = e => {
     e.preventDefault();
-    fetch('http://10.58.52.211:3000/user/signin', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json;charset=utf-8',
-      },
-      body: JSON.stringify(loginUserInfo),
-    })
-      .then(res => res.json())
-      .then(data => {
-        if (data.accessToken) {
-          localStorage.setItem('accessToken', data.accessToken);
-          setIsLoggedIn(true);
-        }
-        console.log(data);
-      });
+    setIsLoggedIn(true);
+    onClose();
+
+    // fetch('http://10.58.52.211:3000/user/signin', {
+    //   method: 'POST',
+    //   headers: {
+    //     'Content-Type': 'application/json;charset=utf-8',
+    //   },
+    //   body: JSON.stringify(loginUserInfo),
+    // })
+    //   .then(res => res.json())
+    //   .then(data => {
+    //     if (data.accessToken) {
+    //       localStorage.setItem('accessToken', data.accessToken);
+    //       setIsLoggedIn(true);
+    //       onClose();
+    //     }
+    //   });
   };
 
   const handleInputChange = e => {
