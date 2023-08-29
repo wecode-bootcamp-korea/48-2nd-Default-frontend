@@ -1,18 +1,18 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { AiFillStar } from 'react-icons/ai';
 import { BiBed } from 'react-icons/bi';
 import Calendar from '../../components/Calendar/Calendar';
-import ReviewItem from '../../components/Detail/ReviewItem';
 import ReservationBox from '../../components/Detail/ReservationBox';
 import useOutsideClick from '../../hooks/useClickOutside';
-import { REVIEWS } from '../../utils/constant';
 import './DetailPage.scss';
+import Review from '../../components/Detail/Review';
 
 const DetailPage = () => {
   const [detailData, setDetailData] = useState([]);
   const [isCalendarOpen, setIsCalendarOpen] = useState(false);
   const [selectedStartDate, setSelectedStartDate] = useState(null);
   const [selectedEndDate, setSelectedEndDate] = useState(null);
+  const [comment, setComment] = useState('');
+  const [commentList, setCommentList] = useState([]);
   const calendarRef = useRef();
   const dateSelectRef = useRef();
 
@@ -35,7 +35,6 @@ const DetailPage = () => {
         setDetailData(data);
       });
   }, []);
-
   const calculateNights = () => {
     if (!selectedStartDate || !selectedEndDate) {
       return 0;
@@ -99,6 +98,9 @@ const DetailPage = () => {
                     8월 26일 오후 12:00 전까지 무료로 취소하실 수 있습니다.
                   </p>
                 </div>
+              </div>
+              <div className="description">
+                <p>{detail.roomDescription}</p>
               </div>
               <div className="place">
                 <h1 className="title">숙박 장소</h1>
@@ -164,24 +166,7 @@ const DetailPage = () => {
           </div>
         </div>
       ))}
-
-      <div className="review">
-        <div className="reviewHeader">
-          <AiFillStar size={22} />
-          <p>4.90</p>
-          <p>후기 {REVIEWS.length}개</p>
-        </div>
-        <div className="reviewContent">
-          {REVIEWS.map(review => (
-            <ReviewItem
-              key={review.id}
-              name={review.name}
-              date={review.date}
-              text={review.text}
-            />
-          ))}
-        </div>
-      </div>
+      <Review />
     </div>
   );
 };

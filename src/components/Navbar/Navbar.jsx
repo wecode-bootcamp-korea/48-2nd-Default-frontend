@@ -12,6 +12,7 @@ const Navbar = () => {
   const [expanded, setExpanded] = useState(false);
   const [isToggleCountryMenu, setIsToggleCountryMenu] = useState(false);
   const navbarContentRef = useRef();
+  const exceptionRef = useRef();
 
   const handleToggleCountryMenu = () => {
     setIsToggleCountryMenu(prev => !prev);
@@ -21,10 +22,14 @@ const Navbar = () => {
     setExpanded(true);
   };
 
-  useOutsideClick(navbarContentRef, () => {
-    setExpanded(false);
-    setIsToggleCountryMenu(false);
-  });
+  useOutsideClick(
+    navbarContentRef,
+    () => {
+      setExpanded(false);
+      setIsToggleCountryMenu(false);
+    },
+    exceptionRef,
+  );
 
   return (
     <div className="navbarContainer">

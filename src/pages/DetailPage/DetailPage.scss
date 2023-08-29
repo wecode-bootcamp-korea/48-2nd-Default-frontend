@@ -105,6 +105,11 @@
           }
         }
 
+        .description {
+          border-bottom: 1px solid #ebebeb;
+          padding-bottom: 32px;
+        }
+
         .place {
           width: fit-content;
           display: flex;
@@ -201,27 +206,6 @@
       .title {
         font-size: 22px;
       }
-    }
-  }
-
-  .review {
-    border-top: 1px solid #ebebeb;
-    padding: 32px 0;
-
-    .reviewHeader {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 22px;
-      font-weight: bold;
-      padding-bottom: 40px;
-    }
-
-    .reviewContent {
-      width: 100%;
-      height: auto;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
     }
   }
 }
