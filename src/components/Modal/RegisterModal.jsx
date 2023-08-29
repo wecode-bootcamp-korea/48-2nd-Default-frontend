@@ -33,6 +33,8 @@ const RegisterModal = ({ onClose, handleRedirect }) => {
       return;
     }
 
+    handleRedirect();
+
     fetch('http://10.58.52.211:3000/user/signup', {
       method: 'POST',
       headers: {
@@ -40,8 +42,14 @@ const RegisterModal = ({ onClose, handleRedirect }) => {
       },
       body: JSON.stringify(userInfo),
     })
-      .then(res => res.json())
-      .then(data => console.log(data));
+      .then(res => {
+        if (res.ok) handleRedirect();
+
+        return res.json();
+      })
+      .then(data => {
+        // 에러 분기처리
+      });
   };
 
   return (

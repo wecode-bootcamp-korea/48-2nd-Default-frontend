@@ -4,7 +4,7 @@ import Button from '../Button/Button';
 import Modal from './Modal';
 import './LoginModal.scss';
 
-const LoginModal = ({ onClose, handleRedirect }) => {
+const LoginModal = ({ onClose, handleRedirect, setIsLoggedIn }) => {
   const [loginUserInfo, setLoginUserInfo] = useState({
     email: '',
     password: '',
@@ -16,20 +16,24 @@ const LoginModal = ({ onClose, handleRedirect }) => {
 
   const handleLogin = e => {
     e.preventDefault();
-    fetch('http://10.58.52.211:3000/user/signin', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json;charset=utf-8',
-      },
-      body: JSON.stringify(loginUserInfo),
-    })
-      .then(res => res.json())
-      .then(data => {
-        if (data.accessToken) {
-          localStorage.setItem('accessToken', data.accessToken);
-          onClose();
-        }
-      });
+    setIsLoggedIn(true);
+    onClose();
+
+    // fetch('http://10.58.52.211:3000/user/signin', {
+    //   method: 'POST',
+    //   headers: {
+    //     'Content-Type': 'application/json;charset=utf-8',
+    //   },
+    //   body: JSON.stringify(loginUserInfo),
+    // })
+    //   .then(res => res.json())
+    //   .then(data => {
+    //     if (data.accessToken) {
+    //       localStorage.setItem('accessToken', data.accessToken);
+    //       setIsLoggedIn(true);
+    //       onClose();
+    //     }
+    //   });
   };
 
   const handleInputChange = e => {
@@ -50,7 +54,7 @@ const LoginModal = ({ onClose, handleRedirect }) => {
       onClose={onClose}
     >
       <div className="modalContent">
-        <div
+        <form
           className="loginModalInputBox"
           onChange={handleInputChange}
           onSubmit={handleLogin}
@@ -86,7 +90,7 @@ const LoginModal = ({ onClose, handleRedirect }) => {
           </div>
 
           <Button text="계속" disabled={!isValid} />
-        </div>
+        </form>
       </div>
     </Modal>
   );
