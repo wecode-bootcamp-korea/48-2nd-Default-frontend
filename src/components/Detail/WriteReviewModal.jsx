@@ -15,7 +15,6 @@ const WriteReviewModal = ({ onReviewSubmit }) => {
     e.preventDefault();
 
     onReviewSubmit({ rating: ratingIndex, content: reviewContent });
-    console.log(ratingIndex);
 
     // fetch('', {
     //   method: 'POST',

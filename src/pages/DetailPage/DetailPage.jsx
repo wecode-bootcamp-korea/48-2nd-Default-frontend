@@ -11,8 +11,6 @@ const DetailPage = () => {
   const [isCalendarOpen, setIsCalendarOpen] = useState(false);
   const [selectedStartDate, setSelectedStartDate] = useState(null);
   const [selectedEndDate, setSelectedEndDate] = useState(null);
-  const [comment, setComment] = useState('');
-  const [commentList, setCommentList] = useState([]);
   const calendarRef = useRef();
   const dateSelectRef = useRef();
 

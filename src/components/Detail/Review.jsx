@@ -37,7 +37,7 @@ const Review = () => {
         )}
       </div>
       <div className="reviewContent">
-        {REVIEWS.map((review, index) => (
+        {REVIEWS.map(review => (
           <div key={review.id}>
             <StarRating ratingIndex={review.rating} setRatingIndex={() => {}} />
             <ReviewItem
