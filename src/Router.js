@@ -4,6 +4,7 @@ import DetailPage from './pages/DetailPage/DetailPage';
 import Navbar from './components/Navbar/Navbar';
 import Main from './pages/Main/Main';
 import WireFrame from './components/Navbar/WireFrame';
+import Footer from './components/Footer/Footer';
 
 const Router = () => {
   return (
@@ -14,6 +15,7 @@ const Router = () => {
         <Route path="/" element={<Main />} />
         <Route path="/detail" element={<DetailPage />} />
       </Routes>
+      <Footer />
     </BrowserRouter>
   );
 };
