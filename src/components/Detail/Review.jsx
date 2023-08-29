@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { AiFillStar } from 'react-icons/ai';
-import { REVIEWS } from '../../utils/constant';
+import { FormatDate } from '../../utils/FormatDate';
+import useOutsideClick from '../../hooks/useClickOutside';
 import StarRating from '../Detail/StarRating';
 import ReviewItem from '../Detail/ReviewItem';
 import WriteReviewModal from './WriteReviewModal';
@@ -8,18 +9,38 @@ import './Review.scss';
 
 const Review = () => {
   const [ratingStates, setRatingStates] = useState([]);
+  const [reviewData, setReviewData] = useState([]);
   const [isReviewOpen, setIsReviewOpen] = useState(false);
-  const [newReviewList, setNewReviewList] = useState([]);
+  const reviewRef = useRef();
 
   const handleOpenWriteReviews = () => {
     setIsReviewOpen(true);
   };
 
   const handleReviewSubmit = review => {
+    console.log(ratingStates);
     setRatingStates(prev => [...prev, review.rating]);
-    setNewReviewList(prev => [...prev, review]);
+    setReviewData(prev => [...prev, review]);
     setIsReviewOpen(false);
+
+    // fetch('/data/reviewData.json', {
+    //   method: 'POST',
+    //   headers: {
+    //     'Content-Type': 'application/json;charset=utf-8',
+    //   },
+    //   body: JSON.stringify(),
+    // })
+    //   .then(res => res.json())
+    //   .then(data => {
+    //     setRatingStates(prev => [...prev, review.rating]);
+    //     setReviewData(prev => [...prev, review]);
+    //     setIsReviewOpen(false);
+    //   });
   };
+
+  useOutsideClick(reviewRef, () => {
+    setIsReviewOpen(false);
+  });
 
   return (
     <div className="review">
@@ -27,9 +48,13 @@ const Review = () => {
         <div className="reviewInfo">
           <AiFillStar size={22} />
           <p>4.90</p>
-          <p>후기 {REVIEWS.length + newReviewList.length}개</p>
+          <p>후기 {reviewData.length}개</p>
         </div>
-        <button className="writeReviewBtn" onClick={handleOpenWriteReviews}>
+        <button
+          className="writeReviewBtn"
+          onClick={handleOpenWriteReviews}
+          ref={reviewRef}
+        >
           후기 작성
         </button>
         {isReviewOpen && (
@@ -37,27 +62,32 @@ const Review = () => {
         )}
       </div>
       <div className="reviewContent">
-        {REVIEWS.map(review => (
-          <div key={review.id}>
-            <StarRating ratingIndex={review.rating} setRatingIndex={() => {}} />
+        {reviewData.map(review => (
+          <div key={review.id} className="reviewList">
+            <StarRating
+              ratingIndex={review.ratings}
+              setRatingIndex={() => {}}
+            />
             <ReviewItem
-              key={review.id}
+              key={review.roomId}
+              profileImage={review.profileImage}
               name={review.name}
-              date={review.createdAt}
+              date={FormatDate(review)}
               text={review.content}
             />
           </div>
         ))}
-        {newReviewList.map((review, index) => (
+        {/* {newReviewList.map((review, index) => (
           <div key={index} className="newReviewList">
             <StarRating ratingIndex={review.rating} setRatingIndex={() => {}} />
             <ReviewItem
               name={review.name}
+              profileImage={review.profileImage}
               date={review.createdAt}
               text={review.content}
             />
           </div>
-        ))}
+        ))} */}
       </div>
     </div>
   );

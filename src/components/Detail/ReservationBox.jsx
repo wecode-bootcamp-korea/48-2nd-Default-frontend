@@ -1,7 +1,6 @@
 import React, { useState, forwardRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AiFillStar } from 'react-icons/ai';
-import { REVIEWS } from '../../utils/constant';
 import './ReservationBox.scss';
 
 const ReservationBox = forwardRef(
@@ -48,7 +47,7 @@ const ReservationBox = forwardRef(
           <div className="rating">
             <AiFillStar />
             <p>4.85</p>
-            <p className="ratingReview">후기 {REVIEWS.length}개</p>
+            <p className="ratingReview">후기 1개</p>
           </div>
         </div>
         <div className="reservationBody">

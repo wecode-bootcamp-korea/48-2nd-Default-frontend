@@ -3,8 +3,8 @@ import { BiBed } from 'react-icons/bi';
 import Calendar from '../../components/Calendar/Calendar';
 import ReservationBox from '../../components/Detail/ReservationBox';
 import useOutsideClick from '../../hooks/useClickOutside';
-import './DetailPage.scss';
 import Review from '../../components/Detail/Review';
+import './DetailPage.scss';
 
 const DetailPage = () => {
   const [detailData, setDetailData] = useState([]);
@@ -33,6 +33,7 @@ const DetailPage = () => {
         setDetailData(data);
       });
   }, []);
+
   const calculateNights = () => {
     if (!selectedStartDate || !selectedEndDate) {
       return 0;
@@ -105,7 +106,9 @@ const DetailPage = () => {
                 <div className="placeInfoContent">
                   <BiBed size={30} />
                   <p className="contentTitle">침실</p>
-                  <p className="contentDetail">퀸사이즈 침대 1개</p>
+                  <p className="contentDetail">
+                    퀸사이즈 침대 {detail.bedroomsCount}개
+                  </p>
                 </div>
               </div>
               <div className="convenient">

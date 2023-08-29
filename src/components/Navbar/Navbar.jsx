@@ -1,7 +1,6 @@
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ImSearch } from 'react-icons/im';
-import useOutsideClick from '../../hooks/useClickOutside';
 import Logo from './Logo';
 import Search from './Search';
 import UserMenu from './UserMenu';
@@ -9,36 +8,30 @@ import CountryList from './CountryList';
 import './Navbar.scss';
 
 const Navbar = () => {
-  const [expanded, setExpanded] = useState(false);
+  const [isExpanded, setIsExpanded] = useState(false);
   const [isToggleCountryMenu, setIsToggleCountryMenu] = useState(false);
-  const navbarContentRef = useRef();
-  const exceptionRef = useRef();
 
   const handleToggleCountryMenu = () => {
     setIsToggleCountryMenu(prev => !prev);
   };
 
   const handleSearchClick = () => {
-    setExpanded(true);
+    setIsExpanded(true);
+    console.log('click');
   };
-
-  useOutsideClick(
-    navbarContentRef,
-    () => {
-      setExpanded(false);
-      setIsToggleCountryMenu(false);
-    },
-    exceptionRef,
-  );
 
   return (
     <div className="navbarContainer">
-      <div className="navbarContentBox" ref={navbarContentRef}>
+      <div className="navbarContentBox">
         <Link to="/">
           <Logo />
         </Link>
-        {!expanded ? (
-          <Search handleSearchClick={handleSearchClick} />
+        {!isExpanded ? (
+          <Search
+            handleSearchClick={handleSearchClick}
+            setIsExpanded={setIsExpanded}
+            setIsToggleCountryMenu={setIsToggleCountryMenu}
+          />
         ) : (
           <div className="fullExpanded">
             <p className="searchTitle">숙소</p>
