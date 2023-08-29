@@ -5,8 +5,11 @@ const WriteReviewModal = () => {
   return (
     <div className="writeModalContainer">
       <form className="writeModal">
-        <textarea />
-        <button>작성하기</button>
+        <textarea
+          className="writeTextArea"
+          placeholder="내용을 입력해 주세요."
+        />
+        <button className="wirteBtn">작성하기</button>
       </form>
     </div>
   );
