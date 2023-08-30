@@ -1,31 +1,10 @@
-import React, { useRef } from 'react';
+import React from 'react';
 import { ImSearch } from 'react-icons/im';
-import useOutsideClick from '../../hooks/useClickOutside';
 import './Search.scss';
 
-const Search = ({
-  handleSearchClick,
-  setIsToggleCountryMenu,
-  setIsExpanded,
-}) => {
-  const searchRef = useRef();
-  const exceptionRef = useRef();
-
-  useOutsideClick(
-    searchRef,
-    () => {
-      setIsExpanded(false);
-      setIsToggleCountryMenu(false);
-    },
-    exceptionRef,
-  );
-
+const Search = ({ handleSearchClick }) => {
   return (
-    <div
-      className="searchContainer"
-      onClick={handleSearchClick}
-      ref={searchRef}
-    >
+    <div className="searchContainer" onClick={handleSearchClick}>
       <p className="searchInputName">어느 나라 어디든지 여행하세요</p>
       <div className="searchIconBox">
         <ImSearch className="searchIcon" size={14} />

@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, forwardRef } from 'react';
 import StarRating from './StarRating';
 import './WriteReviewModal.scss';
 
-const WriteReviewModal = ({ onReviewSubmit, reviewData }) => {
+const WriteReviewModal = forwardRef(({ onReviewSubmit }, ref) => {
   const [reviewContent, setReviewContent] = useState('');
   const [ratingIndex, setRatingIndex] = useState(0);
 
@@ -14,15 +14,19 @@ const WriteReviewModal = ({ onReviewSubmit, reviewData }) => {
   const handleReviewSubmit = e => {
     e.preventDefault();
     if (!reviewContent) return;
-    onReviewSubmit({ rating: ratingIndex, content: reviewContent });
-    console.log(ratingIndex, reviewContent);
+
+    console.log(ratingIndex);
+
+    onReviewSubmit({
+      ratings: ratingIndex,
+      content: reviewContent,
+    });
 
     // fetch('', {
     //   method: 'POST',
     //   headers: {
     //     'Content-Type': 'application/json;charset=utf-8',
     //   },
-    //   body: JSON.stringify(),
     //   body: JSON.stringify({ rating: ratingIndex, content: reviewContent }),
     // })
     //   .then(res => res.json())
@@ -38,20 +42,23 @@ const WriteReviewModal = ({ onReviewSubmit, reviewData }) => {
   };
 
   return (
-    <div className="writeModalContainer">
+    <form ref={ref} className="writeModalContainer">
       <div className="writeModalHeader">
         <h1 className="title">후기 작성하기</h1>
         <StarRating ratingIndex={ratingIndex} setRatingIndex={setRatingIndex} />
       </div>
-      <form className="writeModal" onSubmit={handleReviewSubmit}>
+      <div className="writeModal">
         <textarea
           className="writeTextArea"
           placeholder="내용을 입력해 주세요."
           onChange={handleReviewChange}
         />
-        <button className="wirteBtn">작성하기</button>
-      </form>
-    </div>
+        <button className="wirteBtn" onClick={handleReviewSubmit}>
+          작성하기
+        </button>
+      </div>
+    </form>
   );
-};
+});
+
 export default WriteReviewModal;

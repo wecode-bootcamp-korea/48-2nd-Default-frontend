@@ -1,5 +1,5 @@
 import React, { useState, forwardRef } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { AiFillStar } from 'react-icons/ai';
 import './ReservationBox.scss';
 
@@ -10,6 +10,9 @@ const ReservationBox = forwardRef(
   ) => {
     const [gradientPosition, setGradientPosition] = useState({ x: 0, y: 0 });
     const navigate = useNavigate();
+    const location = useLocation();
+
+    console.log(location);
 
     const handleMouseMove = event => {
       const x = event.nativeEvent.offsetX;
@@ -35,6 +38,22 @@ const ReservationBox = forwardRef(
         return 0;
       }
       return price * calculatedNights;
+    };
+
+    const handleReservation = () => {
+      navigate('/payment');
+
+      fetch('', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json;charset=utf-8',
+        },
+        body: JSON.stringify(),
+      })
+        .then(res => res.json())
+        .then(data => {
+          if (data) navigate('/payment');
+        });
     };
 
     return (
@@ -76,7 +95,7 @@ const ReservationBox = forwardRef(
             </button>
             <button
               className="reserveBtn"
-              onClick={() => navigate('/payment')}
+              onClick={handleReservation}
               onMouseMove={handleMouseMove}
               style={{
                 background: `radial-gradient(circle at ${gradientPosition.x}px ${gradientPosition.y}px, #FF385C, #E61E4D, #E31C5F, #D70466, #BD1E59, #BD1E59)`,
