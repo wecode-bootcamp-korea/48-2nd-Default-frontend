@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { AiFillCheckCircle } from 'react-icons/ai';
 import { BiBed } from 'react-icons/bi';
 import { GiTowel } from 'react-icons/gi';
 import Calendar from '../../components/Calendar/Calendar';
@@ -17,6 +18,10 @@ const DetailPage = () => {
   const calendarRef = useRef();
   const dateSelectRef = useRef();
   const { id } = useParams();
+
+  const averageRatings = (
+    reviewData.reduce((acc, cur) => acc + cur.ratings, 0) / reviewData.length
+  ).toFixed(2);
 
   useOutsideClick(
     calendarRef,
@@ -99,15 +104,15 @@ const DetailPage = () => {
             </div>
             <div className="itemInfo">
               <div className="infoIcon">
-                <BiBed size={30} />
+                <AiFillCheckCircle size={30} />
                 <p className="infoIconText">셀프 체크인</p>
               </div>
               <div className="infoIcon">
-                <BiBed size={30} />
+                <AiFillCheckCircle size={30} />
                 <p className="infoIconText">{name}님은 슈퍼호스트입니다</p>
               </div>
               <div className="infoIcon">
-                <BiBed size={30} />
+                <AiFillCheckCircle size={30} />
                 <p className="infoIconText">
                   8월 26일 오후 12:00 전까지 무료로 취소하실 수 있습니다.
                 </p>
@@ -151,6 +156,7 @@ const DetailPage = () => {
               calculatedNights={calculateNights()}
               setIsCalendarOpen={setIsCalendarOpen}
               selectedStartDate={selectedStartDate}
+              averageRatings={averageRatings}
               selectedEndDate={selectedEndDate}
               reviewData={reviewData}
               detail={detail}
@@ -171,7 +177,11 @@ const DetailPage = () => {
           </div>
         </div>
       </div>
-      <Review reviewData={reviewData} setReviewData={setReviewData} />
+      <Review
+        reviewData={reviewData}
+        setReviewData={setReviewData}
+        averageRatings={averageRatings}
+      />
     </div>
   );
 };

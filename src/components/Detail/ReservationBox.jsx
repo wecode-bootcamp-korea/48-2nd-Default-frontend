@@ -11,6 +11,7 @@ const ReservationBox = forwardRef(
       selectedStartDate,
       selectedEndDate,
       calculatedNights,
+      averageRatings,
       reviewData,
       detail,
       roomId,
@@ -63,7 +64,6 @@ const ReservationBox = forwardRef(
         .then(res => res.json())
         .then(data => {
           if (data) {
-            console.log(selectedStartDate, roomId);
             navigate({
               pathname: '/payment/list',
               search: `?startDate=${selectedStartDate}&roomId=${roomId}`,
@@ -81,7 +81,7 @@ const ReservationBox = forwardRef(
           </p>
           <div className="rating">
             <AiFillStar />
-            <p>4.85</p>
+            <p>{averageRatings}</p>
             <p className="ratingReview">후기 {reviewData.length}개</p>
           </div>
         </div>

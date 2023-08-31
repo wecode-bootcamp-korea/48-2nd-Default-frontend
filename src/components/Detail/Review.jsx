@@ -8,7 +8,7 @@ import ReviewItem from '../Detail/ReviewItem';
 import WriteReviewModal from './WriteReviewModal';
 import './Review.scss';
 
-const Review = ({ reviewData, setReviewData }) => {
+const Review = ({ reviewData, setReviewData, averageRatings }) => {
   const [isReviewOpen, setIsReviewOpen] = useState(false);
   const modalRef = useRef();
   const reviewBtnRef = useRef();
@@ -48,7 +48,6 @@ const Review = ({ reviewData, setReviewData }) => {
     })
       .then(res => res.json())
       .then(result => {
-        console.log(result);
         setReviewData(result);
       });
   };
@@ -70,7 +69,7 @@ const Review = ({ reviewData, setReviewData }) => {
       <div className="reviewHeader">
         <div className="reviewInfo">
           <AiFillStar size={22} />
-          <p>4.90</p>
+          <p>{averageRatings}</p>
           <p>후기 {reviewData.length}개</p>
         </div>
         <button
