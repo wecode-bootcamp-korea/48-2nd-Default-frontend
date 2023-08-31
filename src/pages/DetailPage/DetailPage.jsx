@@ -17,6 +17,17 @@ const DetailPage = () => {
   const calendarRef = useRef();
   const dateSelectRef = useRef();
   const { id } = useParams();
+  const {
+    title,
+    imageUrl,
+    name,
+    guestsCount,
+    bedroomsCount,
+    wifiBoolean,
+    bathroomsCount,
+    airConditioningCount,
+    roomDescription,
+  } = detail;
 
   useOutsideClick(
     calendarRef,
@@ -55,13 +66,10 @@ const DetailPage = () => {
     <div className="detail">
       <div className="detailContainer">
         <div className="detailHeader">
-          <div className="title">{detail.title}</div>
-          {/* <div className="subTitle">
-            별점 후기 슈퍼호스트 Yeongwol-gun, 강원도, 한국
-          </div> */}
+          <div className="title">{title}</div>
         </div>
         <div className="detailImageBox">
-          {detail.imageUrl?.map(image => (
+          {imageUrl?.map(image => (
             <img
               key={image.id}
               className="detailImage"
@@ -74,13 +82,13 @@ const DetailPage = () => {
           <div className="hostInfo">
             <div className="hostInfoHeaderBox">
               <div className="hostInfoHeader">
-                <h1 className="title">{detail.name}</h1>
+                <h1 className="title">{name}</h1>
                 <p className="subtitle">
-                  <span>최대 인원 {detail.guestsCount}명</span>
-                  <span>침실 {detail.bedroomsCount}개</span>
-                  <span>wifi {detail.wifiBoolean ? '있음' : '없음'}</span>
-                  <span>욕실 {detail.bathroomsCount}개</span>
-                  <span>에어컨 {detail.airConditioningCount}개</span>
+                  <span>최대 인원 {guestsCount}명</span>
+                  <span>침실 {bedroomsCount}개</span>
+                  <span>wifi {wifiBoolean ? '있음' : '없음'}</span>
+                  <span>욕실 {bathroomsCount}개</span>
+                  <span>에어컨 {airConditioningCount}개</span>
                 </p>
               </div>
               <img
@@ -95,9 +103,7 @@ const DetailPage = () => {
               </div>
               <div className="infoIcon">
                 <BiBed size={30} />
-                <p className="infoIconText">
-                  {detail.name}님은 슈퍼호스트입니다
-                </p>
+                <p className="infoIconText">{name}님은 슈퍼호스트입니다</p>
               </div>
               <div className="infoIcon">
                 <BiBed size={30} />
@@ -107,16 +113,14 @@ const DetailPage = () => {
               </div>
             </div>
             <div className="description">
-              <p>{detail.roomDescription}</p>
+              <p>{roomDescription}</p>
             </div>
             <div className="place">
               <h1 className="title">숙박 장소</h1>
               <div className="placeInfoContent">
                 <BiBed size={30} />
                 <p className="contentTitle">침실</p>
-                <p className="contentDetail">
-                  퀸사이즈 침대 {detail.bedroomsCount}개
-                </p>
+                <p className="contentDetail">퀸사이즈 침대 {bedroomsCount}개</p>
               </div>
             </div>
             <div className="convenient">
