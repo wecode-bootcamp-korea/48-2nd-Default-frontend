@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { AiFillStar } from 'react-icons/ai';
 import { foramtDateInterval, formatDateToKorean } from '../../utils/formatDate';
 import './Payment.scss';
 
 const Payment = () => {
   const [paymentData, setPaymentData] = useState({});
+  const navigate = useNavigate();
 
   useEffect(() => {
-    console.log(1);
     fetch(
       'http://localhost:3002/payment/list?userId=2&roomId=2&startDate=2023-09-15',
       {
@@ -20,6 +21,7 @@ const Payment = () => {
       .then(res => res.json())
       .then(data => setPaymentData(data.paymentList[0]));
   }, []);
+
   const isEmpty = Object.keys(paymentData).length === 0;
 
   if (isEmpty) return null;
@@ -41,7 +43,13 @@ const Payment = () => {
           'Content-Type': 'application/json;charset=utf-8',
         },
       },
-    ).then(res => res.json());
+    )
+      .then(res => res.json())
+      .then(data => {
+        if (data) {
+          navigate('/paydone');
+        }
+      });
   };
 
   return (
