@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { AiOutlineMenu } from 'react-icons/ai';
+import useOutsideClick from '../../hooks/useClickOutside';
 import LoginModal from '../Modal/LoginModal';
 import RegisterModal from '../Modal/RegisterModal';
 import Avatar from './Avatar';
@@ -10,6 +11,8 @@ const UserMenu = () => {
   const [isToggleMenu, setIsToggleMenu] = useState(false);
   const [modalStatus, setModalStatus] = useState();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const menuRef = useRef();
+  const exceptionRef = useRef();
 
   const MODAL_MAP = {
     login: (
@@ -31,6 +34,24 @@ const UserMenu = () => {
     setIsToggleMenu(prev => !prev);
   };
 
+  useOutsideClick(
+    menuRef,
+    () => {
+      setIsToggleMenu(false);
+    },
+    exceptionRef,
+  );
+
+  const handleLogin = () => {
+    setModalStatus('login');
+    setIsToggleMenu(false);
+  };
+
+  const handleRegister = () => {
+    setModalStatus('register');
+    setIsToggleMenu(false);
+  };
+
   const handleLogOut = () => {
     localStorage.removeItem('accessToken');
     setIsLoggedIn(false);
@@ -39,7 +60,11 @@ const UserMenu = () => {
   return (
     <>
       {MODAL_MAP[modalStatus]}
-      <div className="iconBox" onClick={handleToggleUserMenu}>
+      <div
+        className="iconBox"
+        onClick={handleToggleUserMenu}
+        ref={exceptionRef}
+      >
         <AiOutlineMenu />
         <div className="avatarIcon">
           <Avatar />
@@ -62,12 +87,12 @@ const UserMenu = () => {
             <UserMenuItem
               className="menuList"
               text="로그인"
-              onClick={() => setModalStatus('login')}
+              onClick={handleLogin}
             />
             <UserMenuItem
               className="menuList"
               text="회원가입"
-              onClick={() => setModalStatus('register')}
+              onClick={handleRegister}
             />
           </div>
         )

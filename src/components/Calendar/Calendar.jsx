@@ -1,12 +1,16 @@
 import React, { useState } from 'react';
 import './Calendar.scss';
 
-const Calendar = () => {
+const Calendar = ({
+  className,
+  selectedStartDate,
+  selectedEndDate,
+  setSelectedStartDate,
+  setSelectedEndDate,
+}) => {
   const today = new Date();
   const [currentMonth, setCurrentMonth] = useState(today.getMonth());
   const [currentYear, setCurrentYear] = useState(today.getFullYear());
-  const [selectedStartDate, setSelectedStartDate] = useState(null);
-  const [selectedEndDate, setSelectedEndDate] = useState(null);
 
   const renderCalendar = (year, month) => {
     const firstDay = new Date(year, month, 1).getDay();
@@ -106,7 +110,7 @@ const Calendar = () => {
   };
 
   return (
-    <div className="calendarContainer">
+    <div className={`calendarContainer ${className}`}>
       <div className="calendarHeader">
         <button
           className="arrowBtn"
