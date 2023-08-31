@@ -27,7 +27,7 @@ const Review = ({ reviewData, setReviewData }) => {
       body: JSON.stringify({
         ratings: review.ratings,
         content: review.content,
-        userId: 1,
+        userId: 13,
       }),
     })
       .then(res => res.json())
@@ -48,6 +48,7 @@ const Review = ({ reviewData, setReviewData }) => {
     })
       .then(res => res.json())
       .then(result => {
+        console.log(result);
         setReviewData(result);
       });
   };

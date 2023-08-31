@@ -9,7 +9,7 @@ export const formatDate = review => {
 };
 
 export const formatDateToKorean = payment => {
-  const paymentDate = payment.split('-');
+  const paymentDate = payment?.split('-');
   paymentDate.splice(1, 0, '년');
   paymentDate.splice(3, 0, '월');
   paymentDate.splice(5, 0, '일');

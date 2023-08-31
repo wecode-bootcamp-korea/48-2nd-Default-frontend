@@ -10,12 +10,14 @@ import './UserMenu.scss';
 const UserMenu = () => {
   const [isToggleMenu, setIsToggleMenu] = useState(false);
   const [modalStatus, setModalStatus] = useState();
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const menuRef = useRef();
   const exceptionRef = useRef();
 
   const MODAL_MAP = {
     login: (
       <LoginModal
+        setIsLoggedIn={setIsLoggedIn}
         onClose={() => setModalStatus('')}
         handleRedirect={() => setModalStatus('register')}
       />
@@ -32,6 +34,11 @@ const UserMenu = () => {
     setIsToggleMenu(prev => !prev);
   };
 
+  const handleLogOut = () => {
+    localStorage.removeItem('accessToken');
+    setIsLoggedIn(false);
+  };
+
   useOutsideClick(
     menuRef,
     () => {
@@ -39,16 +46,6 @@ const UserMenu = () => {
     },
     exceptionRef,
   );
-
-  const handleLogin = () => {
-    setModalStatus('login');
-    setIsToggleMenu(false);
-  };
-
-  const handleRegister = () => {
-    setModalStatus('register');
-    setIsToggleMenu(false);
-  };
 
   return (
     <>
@@ -63,19 +60,31 @@ const UserMenu = () => {
           <Avatar />
         </div>
       </div>
-      {isToggleMenu && (
+      {isLoggedIn && isToggleMenu ? (
         <div className="menuListBox">
           <UserMenuItem
             className="menuList"
-            text="로그인"
-            onClick={handleLogin}
-          />
-          <UserMenuItem
-            className="menuList"
-            text="회원가입"
-            onClick={handleRegister}
+            text="로그아웃"
+            onClick={() => {
+              handleLogOut();
+            }}
           />
         </div>
+      ) : (
+        isToggleMenu && (
+          <div className="menuListBox">
+            <UserMenuItem
+              className="menuList"
+              text="로그인"
+              onClick={() => setModalStatus('login')}
+            />
+            <UserMenuItem
+              className="menuList"
+              text="회원가입"
+              onClick={() => setModalStatus('register')}
+            />
+          </div>
+        )
       )}
     </>
   );

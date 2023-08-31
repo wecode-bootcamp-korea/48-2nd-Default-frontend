@@ -1,10 +1,28 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { AiFillStar } from 'react-icons/ai';
 import { foramtDateInterval, formatDateToKorean } from '../../utils/formatDate';
 import './Payment.scss';
 
 const Payment = () => {
   const [paymentData, setPaymentData] = useState({});
+
+  useEffect(() => {
+    console.log(1);
+    fetch(
+      'http://localhost:3002/payment/list?userId=2&roomId=2&startDate=2023-09-15',
+      {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json;charset=utf-8',
+        },
+      },
+    )
+      .then(res => res.json())
+      .then(data => setPaymentData(data.paymentList[0]));
+  }, []);
+  const isEmpty = Object.keys(paymentData).length === 0;
+
+  if (isEmpty) return null;
 
   const { point, title, price, thumbNail, ratings, startDate, endDate } =
     paymentData;
@@ -15,14 +33,15 @@ const Payment = () => {
     price * foramtDateInterval(startDate, endDate) + commission;
 
   const handlePayment = () => {
-    fetch('http://', {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json;charset=utf-8',
+    fetch(
+      `http://localhost:3002/payment/paid?userId=2&roomId=2&startDate=2023-09-15&price=${totalPrice}`,
+      {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json;charset=utf-8',
+        },
       },
-    })
-      .then(res => res.json())
-      .then(data => setPaymentData(data));
+    ).then(res => res.json());
   };
 
   return (
@@ -88,7 +107,7 @@ const Payment = () => {
               </div>
               <div className="priceInfo">
                 <p>에어비앤비 서비스 수수료</p>
-                <p>￦{commission.toLocaleString}</p>
+                <p>￦{commission.toLocaleString()}</p>
               </div>
             </div>
           </div>

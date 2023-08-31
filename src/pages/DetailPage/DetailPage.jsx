@@ -17,17 +17,6 @@ const DetailPage = () => {
   const calendarRef = useRef();
   const dateSelectRef = useRef();
   const { id } = useParams();
-  const {
-    title,
-    imageUrl,
-    name,
-    guestsCount,
-    bedroomsCount,
-    wifiBoolean,
-    bathroomsCount,
-    airConditioningCount,
-    roomDescription,
-  } = detail;
 
   useOutsideClick(
     calendarRef,
@@ -38,7 +27,7 @@ const DetailPage = () => {
   );
 
   useEffect(() => {
-    fetch(`http://10.58.52.234:3000/detail/detail/${id}`, {
+    fetch(`http://10.58.52.234:3000/detail/details/${id}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
@@ -50,6 +39,20 @@ const DetailPage = () => {
         setDetail(data[0]);
       });
   }, []);
+
+  const {
+    title,
+    imageUrl,
+    name,
+    guestsCount,
+    bedroomsCount,
+    profileImage,
+    wifiBoolean,
+    bathroomsCount,
+    airConditioningCount,
+    roomDescription,
+    locationName,
+  } = detail;
 
   const calculateNights = () => {
     if (!selectedStartDate || !selectedEndDate) {
@@ -74,8 +77,8 @@ const DetailPage = () => {
             <img
               key={image.id}
               className="detailImage"
-              src={image.src}
-              alt={image.alt}
+              src={image}
+              alt="상세"
             />
           ))}
         </div>
@@ -92,10 +95,7 @@ const DetailPage = () => {
                   <span>에어컨 {airConditioningCount}개</span>
                 </p>
               </div>
-              <img
-                src="https://a0.muscache.com/im/pictures/5874cae5-198f-4301-91af-d3eb137dd6c4.jpg?im_w=960"
-                alt="프로필"
-              />
+              <img src={profileImage} alt="프로필" />
             </div>
             <div className="itemInfo">
               <div className="infoIcon">
@@ -135,7 +135,9 @@ const DetailPage = () => {
               </div>
             </div>
             <div className="calendarReservation">
-              <h1 className="title">Yeongwol-gun에서 {calculateNights()}박</h1>
+              <h1 className="title">
+                {locationName}에서 {calculateNights()}박
+              </h1>
               <Calendar
                 selectedStartDate={selectedStartDate}
                 selectedEndDate={selectedEndDate}

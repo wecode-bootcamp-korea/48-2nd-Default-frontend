@@ -25,7 +25,6 @@ const Calendar = ({
         new Date(2023, 8, 11),
         new Date(2023, 8, 12),
         new Date(2023, 8, 13),
-        new Date(2023, 8, 14),
         new Date(2023, 8, 15),
         new Date(2023, 9, 10),
         new Date(2023, 9, 11),

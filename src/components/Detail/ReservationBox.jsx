@@ -49,11 +49,11 @@ const ReservationBox = forwardRef(
 
     const handleReservation = () => {
       navigate({
-        pathname: '/payment',
+        pathname: '/payment/list',
         search: `?startDate=${formatDate(selectedStartDate)}&roomId=${roomId}`,
       });
 
-      fetch('', {
+      fetch('http://localhost:3002/payment/list', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json;charset=utf-8',
@@ -62,11 +62,13 @@ const ReservationBox = forwardRef(
       })
         .then(res => res.json())
         .then(data => {
-          if (data)
+          if (data) {
+            console.log(selectedStartDate, roomId);
             navigate({
-              pathname: '/payment',
+              pathname: '/payment/list',
               search: `?startDate=${selectedStartDate}&roomId=${roomId}`,
             });
+          }
         });
     };
 
