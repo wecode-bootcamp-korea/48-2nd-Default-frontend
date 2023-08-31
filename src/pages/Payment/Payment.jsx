@@ -55,7 +55,6 @@ const Payment = () => {
   return (
     <div className="paymentPageContainer">
       <div className="header">
-        <p className="goToBackBtn">&lt;</p>
         <h1>확인 및 결제</h1>
       </div>
       <div className="contentContainer">
