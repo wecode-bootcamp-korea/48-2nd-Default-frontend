@@ -1,0 +1,41 @@
+.payDoneContainer {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .payDoneContentContainer {
+    width: 700px;
+    height: 700px;
+    margin-bottom: 100px;
+    display: flex;
+    flex-direction: column;
+    gap: 100px;
+    border: 1px solid rgb(221, 221, 221);
+    box-shadow:
+      0 4px 6px 3px rgb(0 0 0 / 0.1),
+      0 2px 4px -2px rgb(0 0 0 / 0.1);
+
+    .payDoneHeader {
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+
+      h1 {
+        font-size: 40px;
+      }
+
+      p {
+        font-size: 30px;
+      }
+    }
+
+    .payDoneBody {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+}
