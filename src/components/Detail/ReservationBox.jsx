@@ -1,15 +1,24 @@
 import React, { useState, forwardRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AiFillStar } from 'react-icons/ai';
-import { REVIEWS } from '../../utils/constant';
+import { FormatDate } from '../../utils/FormatDate';
 import './ReservationBox.scss';
 
 const ReservationBox = forwardRef(
   (
-    { setIsCalendarOpen, selectedStartDate, selectedEndDate, calculatedNights },
+    {
+      setIsCalendarOpen,
+      selectedStartDate,
+      selectedEndDate,
+      calculatedNights,
+      reviewData,
+      detail,
+      roomId,
+    },
     ref,
   ) => {
     const [gradientPosition, setGradientPosition] = useState({ x: 0, y: 0 });
+
     const navigate = useNavigate();
 
     const handleMouseMove = event => {
@@ -27,8 +36,8 @@ const ReservationBox = forwardRef(
       e.preventDefault();
     };
 
-    const price = 360000;
-    const pricePerNight = price.toLocaleString();
+    const price = detail.price;
+    const pricePerNight = price?.toLocaleString();
     const commission = 279531;
 
     const totalPrice = () => {
@@ -36,6 +45,29 @@ const ReservationBox = forwardRef(
         return 0;
       }
       return price * calculatedNights;
+    };
+
+    const handleReservation = () => {
+      navigate({
+        pathname: '/payment',
+        search: `?startDate=${FormatDate(selectedStartDate)}&roomId=${roomId}`,
+      });
+
+      fetch('', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json;charset=utf-8',
+        },
+        body: JSON.stringify(),
+      })
+        .then(res => res.json())
+        .then(data => {
+          if (data)
+            navigate({
+              pathname: '/payment',
+              search: `?startDate=${selectedStartDate}&roomId=${roomId}`,
+            });
+        });
     };
 
     return (
@@ -48,7 +80,7 @@ const ReservationBox = forwardRef(
           <div className="rating">
             <AiFillStar />
             <p>4.85</p>
-            <p className="ratingReview">후기 {REVIEWS.length}개</p>
+            <p className="ratingReview">후기 {reviewData.length}개</p>
           </div>
         </div>
         <div className="reservationBody">
@@ -77,7 +109,7 @@ const ReservationBox = forwardRef(
             </button>
             <button
               className="reserveBtn"
-              onClick={() => navigate('/payment')}
+              onClick={handleReservation}
               onMouseMove={handleMouseMove}
               style={{
                 background: `radial-gradient(circle at ${gradientPosition.x}px ${gradientPosition.y}px, #FF385C, #E61E4D, #E31C5F, #D70466, #BD1E59, #BD1E59)`,

@@ -1,6 +1,6 @@
 import React from 'react';
-import './StarRating.scss';
 import { AiFillStar } from 'react-icons/ai';
+import './StarRating.scss';
 
 const ArrayIndexes = [1, 2, 3, 4, 5];
 

@@ -13,7 +13,7 @@ const Router = () => {
       <WireFrame />
       <Routes>
         <Route path="/" element={<Main />} />
-        <Route path="/detail" element={<DetailPage />} />
+        <Route path="/detail/:id" element={<DetailPage />} />
       </Routes>
       <Footer />
     </BrowserRouter>

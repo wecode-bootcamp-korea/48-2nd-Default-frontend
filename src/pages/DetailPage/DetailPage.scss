@@ -154,17 +154,10 @@
             font-weight: bold;
           }
 
-          .convenientContent {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            column-gap: 40px;
-            row-gap: 20px;
-
-            .contentIcon {
-              display: flex;
-              align-items: center;
-              gap: 10px;
-            }
+          .contentIcon {
+            display: flex;
+            align-items: center;
+            gap: 10px;
           }
         }
 

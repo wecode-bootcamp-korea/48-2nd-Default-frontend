@@ -1,25 +1,68 @@
-import React, { useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import { AiFillStar } from 'react-icons/ai';
-import { REVIEWS } from '../../utils/constant';
+import { FormatDate } from '../../utils/FormatDate';
+import useOutsideClick from '../../hooks/useClickOutside';
 import StarRating from '../Detail/StarRating';
 import ReviewItem from '../Detail/ReviewItem';
 import WriteReviewModal from './WriteReviewModal';
 import './Review.scss';
 
-const Review = () => {
-  const [ratingStates, setRatingStates] = useState([]);
+const Review = ({ reviewData, setReviewData }) => {
   const [isReviewOpen, setIsReviewOpen] = useState(false);
-  const [newReviewList, setNewReviewList] = useState([]);
+  const modalRef = useRef();
+  const reviewBtnRef = useRef();
+  const { id } = useParams();
 
   const handleOpenWriteReviews = () => {
     setIsReviewOpen(true);
   };
 
   const handleReviewSubmit = review => {
-    setRatingStates(prev => [...prev, review.rating]);
-    setNewReviewList(prev => [...prev, review]);
-    setIsReviewOpen(false);
+    fetch(`http://10.58.52.234:3000/detail/incontent/${id}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8',
+      },
+      body: JSON.stringify({
+        ratings: review.ratings,
+        content: review.content,
+        user_id: 1,
+      }),
+    })
+      .then(res => res.json())
+      .then(res => {
+        if (res.message === 'review created') {
+          getReview();
+          setIsReviewOpen(false);
+        }
+      });
   };
+
+  const getReview = () => {
+    fetch(`http://10.58.52.234:3000/detail/getcontent/${id}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8',
+      },
+    })
+      .then(res => res.json())
+      .then(result => {
+        setReviewData(result);
+      });
+  };
+
+  useEffect(() => {
+    getReview();
+  }, []);
+
+  useOutsideClick(
+    modalRef,
+    () => {
+      setIsReviewOpen(false);
+    },
+    reviewBtnRef,
+  );
 
   return (
     <div className="review">
@@ -27,37 +70,43 @@ const Review = () => {
         <div className="reviewInfo">
           <AiFillStar size={22} />
           <p>4.90</p>
-          <p>후기 {REVIEWS.length + newReviewList.length}개</p>
+          <p>후기 {reviewData.length}개</p>
         </div>
-        <button className="writeReviewBtn" onClick={handleOpenWriteReviews}>
+        <button
+          className="writeReviewBtn"
+          onClick={handleOpenWriteReviews}
+          ref={reviewBtnRef}
+        >
           후기 작성
         </button>
         {isReviewOpen && (
-          <WriteReviewModal onReviewSubmit={handleReviewSubmit} />
+          <WriteReviewModal
+            ref={modalRef}
+            reviewData={reviewData}
+            onReviewSubmit={handleReviewSubmit}
+            onClose={() => setIsReviewOpen(false)}
+          />
         )}
       </div>
       <div className="reviewContent">
-        {REVIEWS.map(review => (
-          <div key={review.id}>
-            <StarRating ratingIndex={review.rating} setRatingIndex={() => {}} />
-            <ReviewItem
-              key={review.id}
-              name={review.name}
-              date={review.createdAt}
-              text={review.content}
-            />
-          </div>
-        ))}
-        {newReviewList.map((review, index) => (
-          <div key={index} className="newReviewList">
-            <StarRating ratingIndex={review.rating} setRatingIndex={() => {}} />
-            <ReviewItem
-              name={review.name}
-              date={review.createdAt}
-              text={review.content}
-            />
-          </div>
-        ))}
+        {reviewData.length === 0 ? (
+          <p>아직 후기가 없습니다.</p>
+        ) : (
+          reviewData.map(reviews => (
+            <div key={reviews.id} className="reviewList">
+              <StarRating
+                ratingIndex={reviews.ratings}
+                setRatingIndex={() => {}}
+              />
+              <ReviewItem
+                name={reviews.name}
+                profileImage={reviews.profileImage}
+                date={FormatDate(reviews.createdAt)}
+                text={reviews.content}
+              />
+            </div>
+          ))
+        )}
       </div>
     </div>
   );
