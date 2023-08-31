@@ -1,7 +1,7 @@
 import React, { useState, forwardRef, useEffect } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { AiFillStar } from 'react-icons/ai';
-import { FormatDateToReservation } from '../../utils/FormatDate';
+import { FormatDate } from '../../utils/FormatDate';
 import './ReservationBox.scss';
 
 const ReservationBox = forwardRef(
@@ -60,9 +60,7 @@ const ReservationBox = forwardRef(
     const handleReservation = () => {
       navigate({
         pathname: '/payment',
-        search: `?startDate=${FormatDateToReservation(
-          selectedStartDate,
-        )}&roomId=${roomId}`,
+        search: `?startDate=${FormatDate(selectedStartDate)}&roomId=${roomId}`,
       });
 
       // fetch('', {
@@ -92,9 +90,7 @@ const ReservationBox = forwardRef(
           <div className="rating">
             <AiFillStar />
             <p>4.85</p>
-            <p className="ratingReview">
-              후기 {reviewData && reviewData.length}개
-            </p>
+            <p className="ratingReview">후기 {reviewData.length}개</p>
           </div>
         </div>
         <div className="reservationBody">

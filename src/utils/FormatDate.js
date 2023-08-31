@@ -7,13 +7,3 @@ export const FormatDate = review => {
     .replaceAll(' ', '');
   return formattedReviewDate;
 };
-
-export const FormatDateToReservation = date => {
-  const reservationDate = new Date(date).toLocaleDateString().split('');
-  reservationDate.pop();
-  const formattedReservationDate = reservationDate
-    .join('')
-    .replaceAll('.', '-')
-    .replaceAll(' ', '');
-  return formattedReservationDate;
-};

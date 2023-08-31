@@ -9,6 +9,7 @@ import './DetailPage.scss';
 
 const DetailPage = () => {
   const [detail, setDetail] = useState({});
+  const [reviewData, setReviewData] = useState([]);
   const [isCalendarOpen, setIsCalendarOpen] = useState(false);
   const [selectedStartDate, setSelectedStartDate] = useState(null);
   const [selectedEndDate, setSelectedEndDate] = useState(null);
@@ -154,8 +155,9 @@ const DetailPage = () => {
               setIsCalendarOpen={setIsCalendarOpen}
               selectedStartDate={selectedStartDate}
               selectedEndDate={selectedEndDate}
-              ref={dateSelectRef}
+              reviewData={reviewData}
               roomId={id}
+              ref={dateSelectRef}
             />
             <div className="reservationCalendarBox" ref={calendarRef}>
               {isCalendarOpen && (
@@ -171,7 +173,7 @@ const DetailPage = () => {
           </div>
         </div>
       </div>
-      <Review />
+      <Review reviewData={reviewData} setReviewData={setReviewData} />
     </div>
   );
 };

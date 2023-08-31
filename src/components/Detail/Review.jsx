@@ -8,8 +8,7 @@ import ReviewItem from '../Detail/ReviewItem';
 import WriteReviewModal from './WriteReviewModal';
 import './Review.scss';
 
-const Review = () => {
-  const [reviewData, setReviewData] = useState([]);
+const Review = ({ reviewData, setReviewData }) => {
   const [isReviewOpen, setIsReviewOpen] = useState(false);
   const modalRef = useRef();
   const reviewBtnRef = useRef();
