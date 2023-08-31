@@ -1,4 +1,5 @@
 import React, { useRef, useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import { AiFillStar } from 'react-icons/ai';
 import { FormatDate } from '../../utils/FormatDate';
 import useOutsideClick from '../../hooks/useClickOutside';
@@ -12,16 +13,14 @@ const Review = () => {
   const [isReviewOpen, setIsReviewOpen] = useState(false);
   const modalRef = useRef();
   const reviewBtnRef = useRef();
+  const { id } = useParams();
 
   const handleOpenWriteReviews = () => {
     setIsReviewOpen(true);
   };
 
   const handleReviewSubmit = review => {
-    // setRatingStates(prev => [...prev, review.rating]);
-    // setReviewData(prev => [...prev, review]);
-
-    fetch('http://10.58.52.95:3000/detail/createreview', {
+    fetch('http://10.58.52.95:3000/detail/incontent', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
@@ -30,12 +29,10 @@ const Review = () => {
         ratings: review.ratings,
         content: review.content,
         user_id: 1,
-        room_id: 2,
       }),
     })
       .then(res => res.json())
       .then(res => {
-        console.log(res);
         if (res.message === 'review created') {
           getReview();
           setIsReviewOpen(false);
@@ -44,7 +41,7 @@ const Review = () => {
   };
 
   const getReview = () => {
-    fetch('http://10.58.52.95:3000/detail/romreview', {
+    fetch(`http://10.58.52.95:3000/detail/getcontent/${id}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
@@ -52,7 +49,6 @@ const Review = () => {
     })
       .then(res => res.json())
       .then(result => {
-        console.log(result);
         setReviewData(result);
       });
   };
@@ -87,6 +83,7 @@ const Review = () => {
         {isReviewOpen && (
           <WriteReviewModal
             ref={modalRef}
+            reviewData={reviewData}
             onReviewSubmit={handleReviewSubmit}
             onClose={() => setIsReviewOpen(false)}
           />
@@ -105,7 +102,7 @@ const Review = () => {
               <ReviewItem
                 name={reviews.name}
                 profileImage={reviews.profileImage}
-                date={FormatDate(reviews)}
+                date={FormatDate(reviews.createdAt)}
                 text={reviews.content}
               />
             </div>

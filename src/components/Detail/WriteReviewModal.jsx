@@ -15,30 +15,10 @@ const WriteReviewModal = forwardRef(({ onReviewSubmit }, ref) => {
     e.preventDefault();
     if (!reviewContent) return;
 
-    console.log(ratingIndex);
-
     onReviewSubmit({
       ratings: ratingIndex,
       content: reviewContent,
     });
-
-    // fetch('', {
-    //   method: 'POST',
-    //   headers: {
-    //     'Content-Type': 'application/json;charset=utf-8',
-    //   },
-    //   body: JSON.stringify({ rating: ratingIndex, content: reviewContent }),
-    // })
-    //   .then(res => res.json())
-    //   .then(data => console.log(data));
-    //   .then(data => {
-    //     console.log(data);
-
-    //     onReviewSubmit({
-    //       rating: ratingIndex,
-    //       content: reviewContent,
-    //     });
-    //   });
   };
 
   return (

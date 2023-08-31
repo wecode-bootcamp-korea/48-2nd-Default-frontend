@@ -1,18 +1,27 @@
-import React, { useState, forwardRef } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import React, { useState, forwardRef, useEffect } from 'react';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { AiFillStar } from 'react-icons/ai';
+import { FormatDateToReservation } from '../../utils/FormatDate';
 import './ReservationBox.scss';
 
 const ReservationBox = forwardRef(
   (
-    { setIsCalendarOpen, selectedStartDate, selectedEndDate, calculatedNights },
+    {
+      setIsCalendarOpen,
+      selectedStartDate,
+      selectedEndDate,
+      calculatedNights,
+      reviewData,
+      roomId,
+    },
     ref,
   ) => {
     const [gradientPosition, setGradientPosition] = useState({ x: 0, y: 0 });
+    // const [calendarDataList, setCalendarDataList] = useState([]);
+    // const [searchParams, setSearchParams] = useSearchParams();
+    // const startDate = searchParams.get('startDate');
+    // const endDate = searchParams.get('endDate');
     const navigate = useNavigate();
-    const location = useLocation();
-
-    console.log(location);
 
     const handleMouseMove = event => {
       const x = event.nativeEvent.offsetX;
@@ -20,6 +29,14 @@ const ReservationBox = forwardRef(
 
       setGradientPosition({ x, y });
     };
+
+    // useEffect(() => {
+    //   fetch(
+    //     `http://data.json/detail?startDate=${startDate}&endDate=${endDate}`,
+    //   )
+    //     .then(response => response.json())
+    //     .then(result => setCalendarDataList(result));
+    // }, [startDate, endDate]);
 
     const handleCalendarOpen = () => {
       setIsCalendarOpen(prev => !prev);
@@ -41,19 +58,28 @@ const ReservationBox = forwardRef(
     };
 
     const handleReservation = () => {
-      navigate('/payment');
+      navigate({
+        pathname: '/payment',
+        search: `?startDate=${FormatDateToReservation(
+          selectedStartDate,
+        )}&roomId=${roomId}`,
+      });
 
-      fetch('', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json;charset=utf-8',
-        },
-        body: JSON.stringify(),
-      })
-        .then(res => res.json())
-        .then(data => {
-          if (data) navigate('/payment');
-        });
+      // fetch('', {
+      //   method: 'POST',
+      //   headers: {
+      //     'Content-Type': 'application/json;charset=utf-8',
+      //   },
+      //   body: JSON.stringify(),
+      // })
+      //   .then(res => res.json())
+      //   .then(data => {
+      //     if (data)
+      //       navigate({
+      //         pathname: '/payment',
+      //         search: `?startDate=${selectedStartDate}&roomId=${roomId}`,
+      //       });
+      //   });
     };
 
     return (
@@ -66,7 +92,9 @@ const ReservationBox = forwardRef(
           <div className="rating">
             <AiFillStar />
             <p>4.85</p>
-            <p className="ratingReview">후기 1개</p>
+            <p className="ratingReview">
+              후기 {reviewData && reviewData.length}개
+            </p>
           </div>
         </div>
         <div className="reservationBody">
