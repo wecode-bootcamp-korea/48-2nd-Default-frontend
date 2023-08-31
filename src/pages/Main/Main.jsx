@@ -1,8 +1,15 @@
 import React from 'react';
-import WireFrame from '../../components/Navbar/WireFrame';
+import CategorySelection from './CategorySelection/CategorySelection';
+import AccomodationList from './AccomodationList/AccomodationList';
+import './Main.scss';
 
 const Main = () => {
-  return <div className="mainContainer">Main</div>;
+  return (
+    <div className="main">
+      <CategorySelection />
+      <AccomodationList />
+    </div>
+  );
 };
 
 export default Main;
