@@ -19,21 +19,21 @@ const LoginModal = ({ onClose, handleRedirect, setIsLoggedIn }) => {
     setIsLoggedIn(true);
     onClose();
 
-    // fetch('http://10.58.52.211:3000/user/signin', {
-    //   method: 'POST',
-    //   headers: {
-    //     'Content-Type': 'application/json;charset=utf-8',
-    //   },
-    //   body: JSON.stringify(loginUserInfo),
-    // })
-    //   .then(res => res.json())
-    //   .then(data => {
-    //     if (data.accessToken) {
-    //       localStorage.setItem('accessToken', data.accessToken);
-    //       setIsLoggedIn(true);
-    //       onClose();
-    //     }
-    //   });
+    fetch('http://10.58.52.103:3000/user/signin', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8',
+      },
+      body: JSON.stringify(loginUserInfo),
+    })
+      .then(res => res.json())
+      .then(data => {
+        if (data.accessToken) {
+          localStorage.setItem('accessToken', data.accessToken);
+          setIsLoggedIn(true);
+          onClose();
+        }
+      });
   };
 
   const handleInputChange = e => {

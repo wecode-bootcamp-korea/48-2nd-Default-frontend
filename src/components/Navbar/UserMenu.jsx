@@ -34,6 +34,11 @@ const UserMenu = () => {
     setIsToggleMenu(prev => !prev);
   };
 
+  const handleLogOut = () => {
+    localStorage.removeItem('accessToken');
+    setIsLoggedIn(false);
+  };
+
   useOutsideClick(
     menuRef,
     () => {
@@ -41,21 +46,6 @@ const UserMenu = () => {
     },
     exceptionRef,
   );
-
-  const handleLogin = () => {
-    setModalStatus('login');
-    setIsToggleMenu(false);
-  };
-
-  const handleRegister = () => {
-    setModalStatus('register');
-    setIsToggleMenu(false);
-  };
-
-  const handleLogOut = () => {
-    localStorage.removeItem('accessToken');
-    setIsLoggedIn(false);
-  };
 
   return (
     <>
@@ -70,14 +60,13 @@ const UserMenu = () => {
           <Avatar />
         </div>
       </div>
-      {isLoggedIn ? (
+      {isLoggedIn && isToggleMenu ? (
         <div className="menuListBox">
           <UserMenuItem
             className="menuList"
             text="로그아웃"
             onClick={() => {
               handleLogOut();
-              // setModalStatus('');
             }}
           />
         </div>
@@ -87,12 +76,12 @@ const UserMenu = () => {
             <UserMenuItem
               className="menuList"
               text="로그인"
-              onClick={handleLogin}
+              onClick={() => setModalStatus('login')}
             />
             <UserMenuItem
               className="menuList"
               text="회원가입"
-              onClick={handleRegister}
+              onClick={() => setModalStatus('register')}
             />
           </div>
         )

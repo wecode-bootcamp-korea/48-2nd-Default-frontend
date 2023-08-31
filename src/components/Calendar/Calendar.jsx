@@ -19,6 +19,28 @@ const Calendar = ({
 
     const weekDays = ['일', '월', '화', '수', '목', '금', '토'];
 
+    const isReserved = date => {
+      const reservationsArray = [
+        new Date(2023, 8, 10),
+        new Date(2023, 8, 11),
+        new Date(2023, 8, 12),
+        new Date(2023, 8, 13),
+        new Date(2023, 8, 15),
+        new Date(2023, 9, 10),
+        new Date(2023, 9, 11),
+        new Date(2023, 9, 12),
+        new Date(2023, 9, 13),
+        new Date(2023, 9, 14),
+        new Date(2023, 9, 15),
+      ];
+
+      const isReservedDate = reservationsArray.some(
+        reservedDate => reservedDate.getTime() === date.getTime(),
+      );
+
+      return isReservedDate;
+    };
+
     let dayCounter = 1;
     for (let week = 0; week < 6; week++) {
       const days = [];
@@ -46,11 +68,12 @@ const Calendar = ({
           ) {
             days.push(<div className="emptyCell" key={day} />);
           } else {
+            const isReservedDate = isReserved(date);
             days.push(
               <div
                 className={`calendarCell ${isSelectable ? 'selectable' : ''} ${
                   isSelected ? 'selected' : ''
-                } ${
+                } ${isReservedDate ? 'reserved' : ''} ${
                   date.getDate() === today.getDate() &&
                   month === today.getMonth() &&
                   year === today.getFullYear()
@@ -58,7 +81,7 @@ const Calendar = ({
                     : ''
                 }`}
                 key={day}
-                onClick={() => handleDateClick(date)}
+                onClick={() => !isReservedDate && handleDateClick(date)}
               >
                 {dayNumber}
               </div>,
