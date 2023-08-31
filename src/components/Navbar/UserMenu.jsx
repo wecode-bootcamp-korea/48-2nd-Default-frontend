@@ -10,14 +10,12 @@ import './UserMenu.scss';
 const UserMenu = () => {
   const [isToggleMenu, setIsToggleMenu] = useState(false);
   const [modalStatus, setModalStatus] = useState();
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const menuRef = useRef();
   const exceptionRef = useRef();
 
   const MODAL_MAP = {
     login: (
       <LoginModal
-        setIsLoggedIn={setIsLoggedIn}
         onClose={() => setModalStatus('')}
         handleRedirect={() => setModalStatus('register')}
       />
@@ -52,11 +50,6 @@ const UserMenu = () => {
     setIsToggleMenu(false);
   };
 
-  const handleLogOut = () => {
-    localStorage.removeItem('accessToken');
-    setIsLoggedIn(false);
-  };
-
   return (
     <>
       {MODAL_MAP[modalStatus]}
@@ -70,32 +63,19 @@ const UserMenu = () => {
           <Avatar />
         </div>
       </div>
-      {isLoggedIn ? (
+      {isToggleMenu && (
         <div className="menuListBox">
           <UserMenuItem
             className="menuList"
-            text="로그아웃"
-            onClick={() => {
-              handleLogOut();
-              // setModalStatus('');
-            }}
+            text="로그인"
+            onClick={handleLogin}
+          />
+          <UserMenuItem
+            className="menuList"
+            text="회원가입"
+            onClick={handleRegister}
           />
         </div>
-      ) : (
-        isToggleMenu && (
-          <div className="menuListBox">
-            <UserMenuItem
-              className="menuList"
-              text="로그인"
-              onClick={handleLogin}
-            />
-            <UserMenuItem
-              className="menuList"
-              text="회원가입"
-              onClick={handleRegister}
-            />
-          </div>
-        )
       )}
     </>
   );

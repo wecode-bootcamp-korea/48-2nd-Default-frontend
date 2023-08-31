@@ -5,6 +5,7 @@ import Navbar from './components/Navbar/Navbar';
 import Main from './pages/Main/Main';
 import WireFrame from './components/Navbar/WireFrame';
 import Footer from './components/Footer/Footer';
+import Payment from './pages/Payment/Payment';
 
 const Router = () => {
   return (
@@ -14,6 +15,7 @@ const Router = () => {
       <Routes>
         <Route path="/" element={<Main />} />
         <Route path="/detail/:id" element={<DetailPage />} />
+        <Route path="/payment/:id" element={<Payment />} />
       </Routes>
       <Footer />
     </BrowserRouter>
