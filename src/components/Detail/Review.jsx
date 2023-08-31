@@ -1,7 +1,7 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { AiFillStar } from 'react-icons/ai';
-import { FormatDate } from '../../utils/FormatDate';
+import { formatDate } from '../../utils/formatDate';
 import useOutsideClick from '../../hooks/useClickOutside';
 import StarRating from '../Detail/StarRating';
 import ReviewItem from '../Detail/ReviewItem';
@@ -19,7 +19,7 @@ const Review = ({ reviewData, setReviewData }) => {
   };
 
   const handleReviewSubmit = review => {
-    fetch(`http://10.58.52.234:3000/detail/incontent/${id}`, {
+    fetch(`http://10.58.52.234:3000/detail/writing/${id}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
@@ -27,7 +27,7 @@ const Review = ({ reviewData, setReviewData }) => {
       body: JSON.stringify({
         ratings: review.ratings,
         content: review.content,
-        user_id: 1,
+        userId: 1,
       }),
     })
       .then(res => res.json())
@@ -40,7 +40,7 @@ const Review = ({ reviewData, setReviewData }) => {
   };
 
   const getReview = () => {
-    fetch(`http://10.58.52.234:3000/detail/getcontent/${id}`, {
+    fetch(`http://10.58.52.234:3000/detail/content/${id}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
@@ -101,7 +101,7 @@ const Review = ({ reviewData, setReviewData }) => {
               <ReviewItem
                 name={reviews.name}
                 profileImage={reviews.profileImage}
-                date={FormatDate(reviews.createdAt)}
+                date={formatDate(reviews.createdAt)}
                 text={reviews.content}
               />
             </div>

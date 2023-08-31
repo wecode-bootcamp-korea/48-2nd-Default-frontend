@@ -139,6 +139,17 @@
           flex-direction: column;
           justify-content: space-around;
           gap: 30px;
+
+          h1 {
+            font-size: 18px;
+          }
+
+          .ratings {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 15px;
+          }
         }
       }
 

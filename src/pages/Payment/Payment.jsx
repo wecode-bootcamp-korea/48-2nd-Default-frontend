@@ -1,7 +1,30 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { AiFillStar } from 'react-icons/ai';
+import { foramtDateInterval, formatDateToKorean } from '../../utils/formatDate';
 import './Payment.scss';
 
 const Payment = () => {
+  const [paymentData, setPaymentData] = useState({});
+
+  const { point, title, price, thumbNail, ratings, startDate, endDate } =
+    paymentData;
+
+  const commission = 27000;
+  const totalWithOutCommission = price * foramtDateInterval(startDate, endDate);
+  const totalPrice =
+    price * foramtDateInterval(startDate, endDate) + commission;
+
+  const handlePayment = () => {
+    fetch('http://', {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8',
+      },
+    })
+      .then(res => res.json())
+      .then(data => setPaymentData(data));
+  };
+
   return (
     <div className="paymentPageContainer">
       <div className="header">
@@ -14,7 +37,9 @@ const Payment = () => {
             <h1 className="title">예약 정보</h1>
             <div className="dateBox">
               <h2>날짜</h2>
-              <p>9월 3일 ~ 8일</p>
+              <p>
+                {formatDateToKorean(startDate)} ~ {formatDateToKorean(endDate)}
+              </p>
             </div>
           </div>
           <div className="pay">
@@ -22,50 +47,54 @@ const Payment = () => {
             <div className="pointBox">
               <div className="pointBoxContent">
                 <h2>총 포인트</h2>
-                <p>100000포인트</p>
+                <p>{point.toLocaleString()}포인트</p>
               </div>
               <div className="pointBoxContent">
                 <h2>사용 포인트</h2>
-                <p>-50000포인트</p>
+                <p>-{totalPrice.toLocaleString()}포인트</p>
               </div>
               <div className="pointBoxContent">
                 <h2>잔여 포인트</h2>
-                <p>50000포인트</p>
+                <p>{(point - totalPrice).toLocaleString()}포인트</p>
               </div>
             </div>
           </div>
           <div className="reserveBtnBox">
-            <button className="reserveBtn">예약 요청</button>
+            <button className="reserveBtn" onClick={handlePayment}>
+              결제 요청
+            </button>
           </div>
         </div>
         <div className="detailInfo">
           <div className="placeInfoBox">
-            <img
-              src="https://a0.muscache.com/im/pictures/9af12dcc-48fb-446f-aab4-44109cea3576.jpg?aki_policy=large"
-              alt="장소"
-              className="placeImage"
-            />
+            <img src={thumbNail} alt="장소" className="placeImage" />
             <div className="placeInfo">
-              <h1>title</h1>
-              <p>rating</p>
+              <h1>{title}</h1>
+              <p className="ratings">
+                <AiFillStar />
+                {ratings.toFixed(2)}
+              </p>
             </div>
           </div>
           <div className="priceInfoContainer">
             <h1 className="title">요금 세부정보</h1>
             <div className="priceInfoBox">
               <div className="priceInfo">
-                <p>￦360000 x 5박</p>
-                <p>￦180000</p>
+                <p>
+                  ￦{price.toLocaleString()} x{' '}
+                  {foramtDateInterval(startDate, endDate)}박
+                </p>
+                <p>￦{totalWithOutCommission}</p>
               </div>
               <div className="priceInfo">
                 <p>에어비앤비 서비스 수수료</p>
-                <p>￦279531</p>
+                <p>￦{commission.toLocaleString}</p>
               </div>
             </div>
           </div>
           <div className="totalPriceInfoBox">
             <h2 className="title">총 합계</h2>
-            <p>￦123812739182</p>
+            <p>￦{totalPrice.toLocaleString()}</p>
           </div>
         </div>
       </div>

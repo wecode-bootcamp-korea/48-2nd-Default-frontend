@@ -14,11 +14,11 @@ const Modal = ({
 }) => {
   const [isHost, setIsHost] = useState(false);
 
-  const handleChenckboxChange = e => {
+  const handleCheckboxChange = e => {
     const { checked } = e.target;
     setIsHost(checked);
 
-    fetch('/data/data.json', {
+    fetch('http://10.58.52.103:3000/user/signup', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
@@ -44,7 +44,7 @@ const Modal = ({
             <div className="hostBox">
               <input
                 type="checkbox"
-                onChange={handleChenckboxChange}
+                onChange={handleCheckboxChange}
                 id="host"
               />
               <label htmlFor="host">호스트로 로그인</label>

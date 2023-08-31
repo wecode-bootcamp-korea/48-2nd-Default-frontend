@@ -38,7 +38,7 @@ const DetailPage = () => {
   );
 
   useEffect(() => {
-    fetch(`http://10.58.52.234:3000/detail/getDetail/${id}`, {
+    fetch(`http://10.58.52.234:3000/detail/detail/${id}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
@@ -46,6 +46,7 @@ const DetailPage = () => {
     })
       .then(res => res.json())
       .then(data => {
+        localStorage.getItem('accessToken');
         setDetail(data[0]);
       });
   }, []);
