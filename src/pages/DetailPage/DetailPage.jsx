@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { BiBed } from 'react-icons/bi';
+import { GiTowel } from 'react-icons/gi';
 import Calendar from '../../components/Calendar/Calendar';
 import ReservationBox from '../../components/Detail/ReservationBox';
 import useOutsideClick from '../../hooks/useClickOutside';
@@ -26,7 +27,7 @@ const DetailPage = () => {
   );
 
   useEffect(() => {
-    fetch(`http://10.58.52.95:3000/detail/getDetail/${id}`, {
+    fetch(`http://10.58.52.234:3000/detail/getDetail/${id}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
@@ -55,9 +56,9 @@ const DetailPage = () => {
       <div className="detailContainer">
         <div className="detailHeader">
           <div className="title">{detail.title}</div>
-          <div className="subTitle">
+          {/* <div className="subTitle">
             별점 후기 슈퍼호스트 Yeongwol-gun, 강원도, 한국
-          </div>
+          </div> */}
         </div>
         <div className="detailImageBox">
           {detail.imageUrl?.map(image => (
@@ -120,23 +121,12 @@ const DetailPage = () => {
             </div>
             <div className="convenient">
               <h1 className="title">숙소 편의시설</h1>
-              <div className="convenientContent">
-                <div className="contentIcon">
-                  <BiBed size={30} />
-                  <p>강 전망</p>
-                </div>
-                <div className="contentIcon">
-                  <BiBed size={30} />
-                  <p>전용 온수 욕조</p>
-                </div>
-                <div className="contentIcon">
-                  <BiBed size={30} />
-                  <p>공용 수영장</p>
-                </div>
-                <div className="contentIcon">
-                  <BiBed size={30} />
-                  <p>140인치 HDTV</p>
-                </div>
+              <div className="contentIcon">
+                <GiTowel size={30} />
+                <p>
+                  <b>필수 품목</b>
+                </p>
+                <span>{detail.amenities ? '있음' : '없음'}</span>
               </div>
             </div>
             <div className="calendarReservation">
@@ -156,6 +146,7 @@ const DetailPage = () => {
               selectedStartDate={selectedStartDate}
               selectedEndDate={selectedEndDate}
               reviewData={reviewData}
+              detail={detail}
               roomId={id}
               ref={dateSelectRef}
             />

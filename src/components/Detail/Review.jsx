@@ -19,7 +19,7 @@ const Review = ({ reviewData, setReviewData }) => {
   };
 
   const handleReviewSubmit = review => {
-    fetch('http://10.58.52.95:3000/detail/incontent', {
+    fetch(`http://10.58.52.234:3000/detail/incontent/${id}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
@@ -40,7 +40,7 @@ const Review = ({ reviewData, setReviewData }) => {
   };
 
   const getReview = () => {
-    fetch(`http://10.58.52.95:3000/detail/getcontent/${id}`, {
+    fetch(`http://10.58.52.234:3000/detail/getcontent/${id}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',

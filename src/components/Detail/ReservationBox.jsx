@@ -1,5 +1,5 @@
-import React, { useState, forwardRef, useEffect } from 'react';
-import { useNavigate, useSearchParams } from 'react-router-dom';
+import React, { useState, forwardRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { AiFillStar } from 'react-icons/ai';
 import { FormatDate } from '../../utils/FormatDate';
 import './ReservationBox.scss';
@@ -12,15 +12,13 @@ const ReservationBox = forwardRef(
       selectedEndDate,
       calculatedNights,
       reviewData,
+      detail,
       roomId,
     },
     ref,
   ) => {
     const [gradientPosition, setGradientPosition] = useState({ x: 0, y: 0 });
-    // const [calendarDataList, setCalendarDataList] = useState([]);
-    // const [searchParams, setSearchParams] = useSearchParams();
-    // const startDate = searchParams.get('startDate');
-    // const endDate = searchParams.get('endDate');
+
     const navigate = useNavigate();
 
     const handleMouseMove = event => {
@@ -30,14 +28,6 @@ const ReservationBox = forwardRef(
       setGradientPosition({ x, y });
     };
 
-    // useEffect(() => {
-    //   fetch(
-    //     `http://data.json/detail?startDate=${startDate}&endDate=${endDate}`,
-    //   )
-    //     .then(response => response.json())
-    //     .then(result => setCalendarDataList(result));
-    // }, [startDate, endDate]);
-
     const handleCalendarOpen = () => {
       setIsCalendarOpen(prev => !prev);
     };
@@ -46,8 +36,8 @@ const ReservationBox = forwardRef(
       e.preventDefault();
     };
 
-    const price = 360000;
-    const pricePerNight = price.toLocaleString();
+    const price = detail.price;
+    const pricePerNight = price?.toLocaleString();
     const commission = 279531;
 
     const totalPrice = () => {
@@ -63,21 +53,21 @@ const ReservationBox = forwardRef(
         search: `?startDate=${FormatDate(selectedStartDate)}&roomId=${roomId}`,
       });
 
-      // fetch('', {
-      //   method: 'POST',
-      //   headers: {
-      //     'Content-Type': 'application/json;charset=utf-8',
-      //   },
-      //   body: JSON.stringify(),
-      // })
-      //   .then(res => res.json())
-      //   .then(data => {
-      //     if (data)
-      //       navigate({
-      //         pathname: '/payment',
-      //         search: `?startDate=${selectedStartDate}&roomId=${roomId}`,
-      //       });
-      //   });
+      fetch('', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json;charset=utf-8',
+        },
+        body: JSON.stringify(),
+      })
+        .then(res => res.json())
+        .then(data => {
+          if (data)
+            navigate({
+              pathname: '/payment',
+              search: `?startDate=${selectedStartDate}&roomId=${roomId}`,
+            });
+        });
     };
 
     return (
