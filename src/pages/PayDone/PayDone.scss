@@ -12,7 +12,6 @@
     display: flex;
     flex-direction: column;
     gap: 100px;
-    // border: 1px solid rgb(221, 221, 221);
     padding: 40px;
 
     .payDoneHeader {
@@ -46,6 +45,12 @@
         border-radius: 10px;
         padding: 20px 0;
         font-weight: bold;
+        transition: all ease 0.3s;
+
+        &:hover {
+          cursor: pointer;
+          background-color: #e05583;
+        }
       }
     }
   }
