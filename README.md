@@ -19,6 +19,8 @@
 
 <b>이인재(Product Manager)</b> : 전반적인 PET(Product, End-User, Tech) 분석, Navbar, Footer, 상세 페이지 및 예약 기능, 결제 페이지, 결제 완료 페이지, 로그인, 회원가입 
 
+홍래영 : 메인 페이지
+
 #### Backend
 
 권영경 : ERD모델링, 메인페이지 리스트, 카테고리 필터
